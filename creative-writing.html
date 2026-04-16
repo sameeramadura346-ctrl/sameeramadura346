@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Writing - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="sameera-style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QH6Z3VRWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6QH6Z3VRWB');
+    </script>
+</head>
+
+<body id="top">
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="prompt-hub.html" class="nav-link active">Prompt Hub</a></li>
+                <li><a href="live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="our-tools.html" class="nav-link">Our Tools</a></li>
+                <li><a href="about-us.html" class="nav-link">About Us</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+        <section class="features" style="width: 100%; max-width: 1200px; text-align: center;">
+            <h2 class="section-title">CREATIVE WRITING</h2>
+            <p class="section-subtitle">Choose a prompt to copy and be redirected to an AI writing assistant. Enhance
+                your storytelling, copywriting, and creative expression.</p>
+
+            <div class="big-cards-grid-3">
+                <!-- Row 1 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="From this text: [paste], keep only the single most important message, no background, no fluff."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Core Message Extractor</div>
+                                <div class="prompt-content">“From this text: [paste], keep only the single most
+                                    important message, no background, no fluff.” Short starts with focus.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Rewrite the text as one sentence under 20 words that preserves the core claim and stakes."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The One-Sentence Shrink Ray</div>
+                                <div class="prompt-content">“Rewrite the text as one sentence under 20 words that
+                                    preserves the core claim and stakes.” Word limits force discipline.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Boil the text down to five beats: context, tension, insight, action, result. One short line per beat."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Five-Beat Story Cut</div>
+                                <div class="prompt-content">“Boil the text down to five beats: context, tension,
+                                    insight, action, result. One short line per beat.” Structure removes padding.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 2 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Translate the text for Year 7 reading level. Short sentences, concrete words, no jargon. Keep key terms like [terms]."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Plain-English Pass</div>
+                                <div class="prompt-content">“Translate the text for Year 7 reading level. Short
+                                    sentences, concrete words, no jargon. Keep key terms like [terms].” Clarity creates
+                                    brevity.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Start with the outcome, then list only the steps to get it. Max 90 words. No background."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Action-First Rewrite</div>
+                                <div class="prompt-content">“Start with the outcome, then list only the steps to get it.
+                                    Max 90 words. No background.” Lead with what matters.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Turn the text into three to five bullets. Each bullet starts with a verb and ends with a result. Max 12 words per bullet."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Bullet Compressor</div>
+                                <div class="prompt-content">“Turn the text into three to five bullets. Each bullet
+                                    starts with a verb and ends with a result. Max 12 words per bullet.” Bullets cut
+                                    filler.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 3 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Write one opening line that creates curiosity or a clear benefit, then remove any line that does not serve that hook. Return the new first line and the trimmed text, max 120 words."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Hook and Cut</div>
+                                <div class="prompt-content">“Write one opening line that creates curiosity or a clear
+                                    benefit, then remove any line that does not serve that hook. Return the new first
+                                    line and the trimmed text, max 120 words.” One idea, one path.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Write three specific calls to action that match this content and goal [goal]. Each 6 to 10 words, clear next step, no hype."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The CTA Tightener</div>
+                                <div class="prompt-content">“Write three specific calls to action that match this
+                                    content and goal [goal]. Each 6 to 10 words, clear next step, no hype.” Precision
+                                    converts.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 4 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Rewrite this text to be [tone] while maintaining the original meaning. Use vocabulary that resonates with [audience]."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Tone Shifter</div>
+                                <div class="prompt-content">Rewrite this text to be [tone] while maintaining the
+                                    original meaning. Use vocabulary that resonates with [audience].</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Identify parts of this text that are 'telling' and rewrite them to 'show' the reader through sensory details and action."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Show, Don't Tell</div>
+                                <div class="prompt-content">Identify parts of this text that are 'telling' and rewrite
+                                    them to 'show' the reader through sensory details and action.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Analyze this plot outline for pacing and structural weaknesses. Suggest specific improvements to heighten tension."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Story Beat Doctor</div>
+                                <div class="prompt-content">Analyze this plot outline for pacing and structural
+                                    weaknesses. Suggest specific improvements to heighten tension.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 5 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Identify any clichés or overused phrases in this text and suggest 3 original, fresh alternatives for each."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Cliché Buster</div>
+                                <div class="prompt-content">Identify any clichés or overused phrases in this text and
+                                    suggest 3 original, fresh alternatives for each.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Rewrite this scene from the perspective of the antagonist, highlighting their internal justification and biases."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Perspective Flip</div>
+                                <div class="prompt-content">Rewrite this scene from the perspective of the antagonist,
+                                    highlighting their internal justification and biases.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Create 5 unique, non-obvious metaphors or similes to describe [concept/emotion] without using standard tropes."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Metaphor Engine</div>
+                                <div class="prompt-content">Create 5 unique, non-obvious metaphors or similes to
+                                    describe [concept/emotion] without using standard tropes.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 6 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Generate 5 compelling opening hooks for an article about [topic], ranging from provocative questions to startling statistics."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Hook Generator</div>
+                                <div class="prompt-content">Generate 5 compelling opening hooks for an article about
+                                    [topic], ranging from provocative questions to startling statistics.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Act as a critical editor. Ask me 3 probing questions about this draft that challenge my assumptions and strengthen the argument."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Socratic Editor</div>
+                                <div class="prompt-content">Act as a critical editor. Ask me 3 probing questions about
+                                    this draft that challenge my assumptions and strengthen the argument.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Restructure this raw content into a clear [Framework, e.g., AIDA/PAS] format to maximize persuasion and clarity."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Framework Fitter</div>
+                                <div class="prompt-content">Restructure this raw content into a clear [Framework, e.g.,
+                                    AIDA/PAS] format to maximize persuasion and clarity.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 7 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Analyze the style of [Author/Speaker] and rewrite this text to mimic their sentence structure, vocabulary, and rhythm."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <div class="card-display-text">
+                                <div class="card-headline">The Voice Mimic</div>
+                                <div class="prompt-content">Analyze the style of [Author/Speaker] and rewrite this text
+                                    to mimic their sentence structure, vocabulary, and rhythm.</div>
+                            </div>
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Sameera</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p class="copyright">© 2025 sameera official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor" />
+        </svg>
+    </a>
+
+    <!-- Prompt Copy Notification Toast -->
+    <div id="promptToast" class="prompt-toast">PROMPT COPIED!</div>
+
+    <script>
+        document.querySelectorAll('.big-card-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const prompt = this.getAttribute('data-prompt');
+                const targetUrl = this.getAttribute('href');
+
+                // Copy to clipboard
+                navigator.clipboard.writeText(prompt).then(() => {
+                    // Show toast
+                    const toast = document.getElementById('promptToast');
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        // Open target URL in a new tab after a brief delay
+                        window.open(targetUrl, '_blank');
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+    <script src="sameera-scripts.js"></script>
+</body>
+
+</html>

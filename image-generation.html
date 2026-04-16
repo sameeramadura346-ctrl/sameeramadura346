@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="sameera-style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QH6Z3VRWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6QH6Z3VRWB');
+    </script>
+</head>
+
+<body id="top">
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="prompt-hub.html" class="nav-link active">Prompt Hub</a></li>
+                <li><a href="live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="our-tools.html" class="nav-link">Our Tools</a></li>
+                <li><a href="about-us.html" class="nav-link">About Us</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+        <section class="features" style="width: 100%; max-width: 1200px; text-align: center;">
+            <h2 class="section-title">IMAGE GENERATION</h2>
+            <p class="section-subtitle">Click the image you want; the prompt will be copied and you will be redirected
+                to the Gemini site. You should sign in to Gemini, then upload your image and paste the prompt to start
+                generating.</p>
+
+            <div class="big-cards-grid-3">
+                <!-- Row 1 -->
+                <a href="https://gemini.google.com" data-prompt="A hyper-realistic full-body portrait of the uploaded image sitting casually beside a tall, glowing TikTok logo, slightly tilted for motion and flair. One arm rests on the logo, the other hand holds a cup mid-gesture.
+Captured in DSLR-style realism, crisp textures, and shallow depth of field.
+Background: soft pastel teal studio with subtle pink highlights, evoking a neon bounce light effect.
+Outfit: black oversized hoodie with neon trim, white cargo pants, and chunky sneakers.
+Style: energetic, youthful, ultra-detailed — like a street-style campaign shot, not CGI" class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt1.png" alt="Tool 1">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Sokraksa</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Low angle cinematic editorial shot, dramatic worm’s eye view composition. A powerful stylish person posed confidently atop a glossy white grand piano, wearing an opulent black lace corset dress with sheer tulle layers, satin ribbons, and dramatic feathered wings crafted in matte black texture. Long sheer gloves in translucent silk add contrast against the structured outfit, the pose relaxed yet dominant, commanding the frame. The environment is a lavish classical interior engulfed in controlled flames, burning walls, glowing embers in the air, and a scorched luxury atmosphere filled edge to edge with fire and smoke, no empty space. Cinematic Tom Ford lighting with warm golden key light, deep shadows, intense rim light catching glossy surfaces, sparks frozen mid-air, subtle film grain, ultra-rich contrast, sensual apocalyptic haute couture mood, tactile textures throughout. Strictly preserve reference facial features, hair color and eye color."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt2.png" alt="Tool 2">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Prompters Mx</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="OrangeApricot3294 Hyper-realistic, preserve original face, person wearing skin fit light grey knitted sweater, blue high-waisted jeans, white high-top sneakers, standing with arm around giant 3D Tom; Jerry on Tom's shoulder, fun mischievous expression, Tom posing confidently, Jerry playfully, 3D photorealistic duo of Tom &amp; Jerry, clean grey-blue backdrop."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt26.png" alt="Tool 26">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Cuteness of world</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 2 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Passport-size photo of a man wearing a deep silver blazer, white shirt, and a solid black tie, strictly following the reference image for facial features and pose. The background must be plain white, clean, and professional. The final output must be in standard passport photo dimensions (2x2 inches or 51x51 mm) with realistic lighting and sharp details, perfect for official use"
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt4.png" alt="Tool 4">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By AI Image Prompt</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="A mystical ethereal woman standing in a vast field of deep red flowers, long flowing silver-white hair drifting in the wind like silk threads, pale porcelain skin, soft melancholic expression, wearing an elegant white gown with delicate fabric textures. Foggy atmosphere, moody cinematic lighting, shallow depth of field, dreamy fantasy vibe, ultra-detailed hair strands, soft color grading, high contrast between crimson flowers and white tones, surreal fairytale aesthetic, 8K resolution, photorealistic, fine art photography, dramatic composition"
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt5.png" alt="Tool 5">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By RG Graphic</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Ultra-realistic front camera selfie image. A person (face must match the uploaded image 100%) with a soft, charming smile wearing casual modern clothes. The person stands in the center, casually taking a group selfie with the Avengers team - Superman, Batman, Flash, Aquaman, Wonder Woman, and Cyborg. All superheroes look realistic, modern, slightly casual (not overly dramatic). Their suits show light wear: dust, scratches, faded metallic edges, minor wrinkles. Expressions are friendly and natural: relaxed posture, slight smiles, no battle pose. Background: Delhi street, evening golden hour - subtle traffic, chai stall, pedestrians, street signboards, warm glowing lights from shops. Front camera perspective, slight wide-angle distortion, cinematic depth of field, ultra-realistic skin texture, pores visible, natural ambient lighting, smooth color grade, high resolution 8K."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt29.png" alt="Tool 29">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Graphics Solution Tricks</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 3 -->
+                <a href="https://gemini.google.com" data-prompt="Ultra-realistic full-body portrait of my photo uploaded(keep original face), set against a monochromatic emerald-green studio backdrop.
+He wears a minimalist deep-green suit, white shirt, and green New Balance trainers featuring the white “N” logo.
+Leans at wall corner, maintaining the same body posture.
+Background: green gradient with faint diagonal geometric grids.
+Directional left lighting creates clean, engineered shadow lines.
+Top-right: white New Balance logotype, tagline “CRAFTED TO MOVE,” with script “Fearlessly Independent.”
+Clean, refined, performance-precision aesthetic." class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt7.png" alt="Tool 7">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Sokraksa</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Use attached photo for reference
+A stunning very extreme close-up portrait of a woman wearing a shimmering, red, hooded garment, holding a beautiful very detailed Christmas snow globe in her cupped hands.
+The light from the Snow Globe illuminates her face in a bright glow. Her eyes are focused and mysterious. Very shallow depth of field, with a warm, out-of-focus bokeh background of holiday lights. Cinematic lighting, dramatic contrast, falling snow, intricate detail, fantasy portraiture, photorealistic, high resolution.
+It should be extremely snowing very hard as the snow should be covering the background and subject with amazing light and shadows, very detailed. The snow should make the subject barely visible."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt8.png" alt="Tool 8">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Prompters Mx</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Two women stand side by side in a studio: left, a realistic human modeled on my own facial features and natural look (accurate face structure, skin tone, proportions, and subtle expressions), natural skin texture and soft smile; right, a semi-realistic stylized 3D character derived from the same facial features and personal style, with slightly larger expressive eyes and smooth shading. Both have long dark hair styled according to my usual look, matching black fitted mini dresses with V necklines and black leather jackets with fur collars. They lean forward in mirrored poses, heads tilted inward. Neutral grey backdrop, soft even front lighting, eye-level 50mm lens, deep focus, 4:5 aspect ratio."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt25.png" alt="Tool 25">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Prompters Mx</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 4 -->
+                <a href="https://gemini.google.com" data-prompt="Ultra-realistic cinematic creator / gamer setup portrait optimized for a YouTube channel visual identity.
+Use uploaded face as reference at 200% accuracy. Facial features must remain identical with zero changes or stylization.
+
+A confident content creator sitting perfectly centered in the frame, symmetrical composition, strong presence with a relaxed and professional posture.
+
+Environment
+
+A visually striking creator / gamer desk setup, immersive and modern, not corporate.
+The atmosphere is bold, energetic, and highly engaging, optimized for YouTube thumbnails and channel banners.
+
+Desk setup details
+
+Modern gaming-style desk with clean lines and matte surfaces.
+
+A Mac device placed naturally on the desk.
+
+The Mac screen displays the YouTube channel “AI Trends” with a realistic YouTube UI.
+
+A custom premium 3D “100K Subscribers” YouTube creator award placed on the desk.
+
+A high-end RGB gaming PC case positioned beside or slightly behind the desk, internal components glowing red with subtle white accents.
+
+RGB headphones hanging on the side of the desk, lighting set to red only.
+
+Subject appearance
+
+Casual stylish outfit in dark tones with red accents (modern YouTube creator style).
+
+A smart watch on the wrist with a soft red futuristic glow.
+
+Natural confident expression, calm, charismatic, and camera-ready.
+
+Background & branding
+
+Behind the subject, a dramatic creator wall design.
+
+“AI Trends” written as solid three-dimensional decor in YouTube red.
+
+Strong red backlighting behind the “AI Trends” text, creating a powerful glowing halo effect.
+
+A realistic 3D YouTube play button icon mounted next to the logo.
+
+Below the logo: “100K Subscribers” with a clean YouTube play icon.
+
+Lighting & atmosphere
+
+Cinematic YouTube red–dominant RGB lighting throughout the scene.
+
+Balanced contrast suitable for thumbnails and banners without crushing details.
+
+Soft key light on the face to preserve natural skin tones.
+
+Red rim light outlining the shoulders and head for separation from the background.
+
+Subtle reflections and glow on desk surfaces and tech elements.
+
+Camera & composition
+
+Eye-level camera angle.
+
+Perfectly centered subject.
+
+Shallow depth of field with sharp focus on the subject and desk, softly blurred background.
+
+Optimized for YouTube thumbnails, channel art, and profile images.
+
+Visual quality
+
+Ultra-detailed natural skin texture.
+
+Realistic fabric folds and materials.
+
+High-contrast cinematic color grading with red highlights." class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt10.png" alt="Tool 10">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By AI Trends</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="an 8k ultra realistic close-up shot of a man with fair skin (face characteristics 100% same as uploaded image) with windswept black hair partially covering one eye. A sharp diagonal natural light beam illuminates his elevated gaze, showcasing his light irises, high cheekbones, and natural color lips. Deep shadows envelope the rest of his face and the environment, creating a dark, cinematic, editorial mood."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt11.png" alt="Tool 11">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Mohsin Hassan</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Use my photo uploaded (keep original face), ULTRA-REALISTIC 8K PORTRAIT of my photo taking a selfie with Ronaldo, both wearing their current football club home jerseys. The scene is set inside their home ground stadium, filled with bright floodlights and an excited crowd. Capture natural expressions, lifelike skin texture, sharp facial details, and accurate jersey colors/logos. The atmosphere should feel like a real match day vibrant lights, detailed background, soft depth of field, realistic shadows, and a cinematic sports-photography style. Ultra-sharp, high-contrast, photorealistic 8K quality. Man is also wearing same football club jersey as the football star wears"
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt12.png" alt="Tool 12">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Sokraksa</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 5 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="A dreamy, cinematic low-angle POV shot of a young anime-style girl leaning over the camera, as if the viewer is lying on the ground. She has soft pink hair flowing naturally in the breeze, expressive wide eyes, and a curious, slightly surprised expression. She wears a modern ninja-inspired outfit with a sleeveless top, arm warmers, and shorts, blending anime aesthetics with realistic fabric textures. Above her, cherry blossom trees bloom, their pink petals forming a canopy against a bright blue sky. Sunlight flares through the branches, creating soft lens flare, shallow depth of field, and creamy bokeh. The scene feels emotional, ethereal, and cinematic, with ultra-realistic lighting, dynamic perspective, gentle motion blur, pastel color grading, high detail, 8K quality, anime realism, cinematic photography, dramatic atmosphere."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt13.png" alt="Tool 13">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By RG Graphic</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Use my image upload in Create a cinematic, ultra-realistic full-body portrait of a young man — keep his facial features 100% identical to the reference image.
+The camera angle is slightly pulled back to show the entire body clearly from head to shoes.
+He is sitting calmly and powerfully on a luxurious teal velvet armchair, not standing, with legs crossed naturally and hands resting confidently on the armrests
+His posture shows confidence and calm authority.
+He wears a dark tailored blazer over a cream turtleneck sweater, slim-fit red trousers, and polished black dress shoes, all perfectly visible within the full frame.
+His glasses catch a warm golden reflection, highlighting intelligence and depth.
+His fingertips are lightly stained with red paint, holding a single paintbrush, symbolizing artistic control and creative energy.
+Behind him rise six tall vertical panels, each showing alternate versions of the same man, expressing confidence, curiosity, reflection, melancholy, focus, and inner calm."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt14.png" alt="Tool 14">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Amadou D Barry</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com" data-prompt="Ultra-realistic half-body shot of a CEO in a royal blue suit with hands casually in pockets, relaxed leadership aura, direct eye contact with subtle confidence, cinematic softbox lighting, minimalist monochromatic cobalt background, wide-angle composition, 8k resolution.
+" class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt15.png" alt="Tool 15">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Jan Ilo</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 6 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="A beautiful young woman sitting outdoors on large snow-sculpted numbers '2026', during a pastel winter sunset.
+She is wearing a cozy white faux-fur coat, a light gray turtleneck sweater, white fitted pants, and dark gray winter boots. Her hands rest gently on her lap, and she lightly touches her hair with one hand, smiling softly at the camera. She has long, slightly wavy brown hair, natural makeup, and a warm gentle expression, Red lipstick. the young women's face matches the uploaded reference image.
+The background features majestic snow-covered mountains, softly blurred with dreamy depth of field. The sky is a gradient of peach, pink, purple, and soft blue a calm winter twilight. The entire scene has soft, diffused lighting with cool blue
+shadows and warm sunset highlights.
+Snow texture is clean, smooth, and fluffy. The numbers '2026' are large, rounded, white, and covered lightly with frost.
+Ultra-realistic, 8K resolution, DSLR portrait lens effect, shallow depth of field, bokeh, cinematic winter atmosphere, soft glow, high dynamic range, perfectly balanced colors, symmetrical composition."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt16.png" alt="Tool 16">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Free AI Prompt</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com" data-prompt="Create A full-body, high-fashion editorial portrait of a stylish skinny young Indian man. He wears a brown texture oversized hoodie and black faded loose jeans with white nike sneaker shoes, and rimless rectangular black sunglasses. Standing on grey marble steps with copper rose-gold railings, he hold iphone 16 pro. Soft, diffused daylight, cinematic colors, ultra-realistic 8K.Make sure the face is 100% same as in the reference image.
+" class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt17.png" alt="Tool 17">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Rahul Kumar</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Use the uploaded reference photo as a strict identity lock and preserve 100% of the original face, including exact facial structure, proportions, skin tone, and natural expression, with no beautification, stylization, or identity alteration. Create a hyper-realistic, cinematic 8K image with premium studio quality and ultra-sharp detail. The subject is a stylish person wearing black sunglasses, dressed in a light grey knitted sweater (soft Tom-themed tone) with a refined luxury knit texture, paired with high-waisted denim blue jeans featuring realistic fabric grain and natural folds, and clean white high-top sneakers with a premium finish. The subject is standing confidently with a fun, mischievous expression, one arm casually wrapped around a giant, photorealistic 3D Tom, while Jerry sits playfully on Tom’s shoulder, creating a lively and friendly interaction. Tom poses confidently with realistic fur texture and depth, while Jerry appears cheerful and mischievous, both rendered in a high-end 3D photorealistic style that blends seamlessly with the human subject. The background is a clean grey-blue studio backdrop, softly lit to keep full focus on the characters and subject, with balanced shadows and cinematic lighting. Ensure realistic skin texture, natural fabric details, precise edges, and professional color grading. Add a subtle white seal reading “HyperDesign” at the bottom-right corner as a premium watermark, keeping the overall look polished, playful, and visually luxurious."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt18.png" alt="Tool 18">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By PromptStudio</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 7 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Use my photo uploaded (keep original face), A high-quality of a stylish my photo with sunglasses, wearing a vibrant blue hoodie and khaki cargo pants. He sitting casually and &quot;stepping out&quot; of a giant, floating 3D social media profile frame. One leg is extended forward toward the camera, showing the detailed colorful sole of a modern sneaker in a forced perspective &quot;pop-out&quot; effect. The background behind the frame is a dreamy, colorful bokeh of blue, pink, and orange lights. The profile frame includes a verified blue checkmark, profile name 'PANHABOTH', and realistic social media icons for likes and comments at the bottom. Hyper-realistic, cinematic lighting, 8k resolution."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt19.png" alt="Tool 19">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY panhaboth</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="The create an a 16k ultra high hyper-realistic photo of a young man whose face and hairstyle is 100% same, featuring Chris Hemsworth as Thor, Clint Barton as Jeremy Renner, spider-man Tony parker, Iron Man as Robert Downey Jr., Mark Ruffalo as the Hulk, Steve Rogers as Chris Evans, Loki as Tom Hiddleston, and Natasha Romanoff as Scarlett Johansson All are posing for the photo, looking directly at the camera (I am sitting on a sofa with Thor and Natasha next to me, and everyone else is behind us, all in their costumes) Setting: House. Aspect ratio 9:16"
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt20.png" alt="Tool 20">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Profe Héctor</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Create an ultra-realistic image using the reference photo face exactly the same. A stylish young man is sitting confidently, wearing an all-black suit, black shirt, and black sunglasses. One hand is placed near his face, clearly showing a gold watch and a gold ring. Behind him stands a large black wolf with glowing red eyes and sharp teeth, snarling fiercely. The wolf looks powerful and protective. The background is dark and dramatic, creating a mysterious and strong atmosphere. Cinematic lighting highlights the man's sharp hairstyle and confident expression. Ultra-realistic, 16K HD, high detail, dark mood, no text."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt21.png" alt="Tool 21">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Ismail Hosen
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 8 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="Create an ultra-realistic photo with sharp BK details, cinematic quality, natural lighting, and shallow depth of field. Use the attached photo as an exact reference for the man's face and hair copy 100% of his facial features and hairstyle. Do not change anything about the face. A man is hovering mid-air, barefoot, in the middle of full-body disintegration. His hair, neck, torso, arms, and legs are breaking apart into dark shard-like fragments. His hands and feet are partially invisible, already turned into thick glowing embers, suggesting they have already burned away. He is wearing a long-sleeved denim shirt and dark trousers. His body is leaning forward, angled slightly away from the camera, while his head is tilted upward. The emotion feels like burning out, exhaustion, and fading away. Dark fragments float around him, peeling off naturally. Some particles glow like hot embers, others remain dark and solid. The scene is set in a vast, empty desert at twilight. Directly below the hovering man, on the ground, is a pair of dark, heavy boots-placed neatly, not worn. Lighting comes from a rising sun behind the subject, creating strong backlight and rim light, making the disintegrating particles glow. Several vertical streaks of light descend from above through the area where the head is dissolving. The horizon is low, the sky dominates the frame with soft blue, orange, and pale yellow golden-hour colors. Color grading is warm and cinematic. The background is softly blurred; the subject remains realistic and detailed. The image blends real photography with surreal digital manipulation, seamless and believable."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt22.png" alt="Tool 22">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Ismail Hosen
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="A hyper-realistic dark fantasy portrait of a mystical forest woman, extreme close-up face shot. Her skin is partially transformed into ancient moss, cracked bark, and emerald fungal textures, seamlessly blending human flesh with nature. Thin twisted vines and roots crawl across her face, framing her eyes. One eye glows with a warm golden bioluminescent light, the other dim and shadowed, creating an eerie yet enchanting contrast. Moist skin texture, ultra-detailed pores, subtle scars, organic patterns etched into her face. Moody teal and green color grading, soft volumetric fog, cinematic low-key lighting with shallow depth of field. Unreal Engine quality, 8K resolution, razor-sharp focus, dark fantasy concept art, ethereal, mysterious, dramatic atmosphere, photorealistic, masterpiece."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt23.png" alt="Tool 23">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY RG Graphic</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Use the uploaded photo as the only facial reference. 100% track and lock identity, proportion and expression. Create a hyper-realistic portrait of a face made from woven small wooden twigs where the entire face and hair are made from small wooden twigs woven not too tightly. Visible braided strands, realistic dry bark texture, handmade artwork. Studio lighting, neutral background, very realistic details. It should clearly look like the same person."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt24.png" alt="Tool 24">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Ahmed Savio AI</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 9 -->
+                <a href="https://gemini.google.com" data-prompt="A dark, surreal double-exposure portrait of a mysterious young man with messy windswept hair. Half of his face appears realistic and sharply lit, while the other half
+                    dissolves into a stormy seascape. His hair transforms into swirling smoke and flocks of birds flying into the distance.Moody teal and deep blue color palette. Dramatic lighting with soft shadows. Emotional, brooding atmosphere. The ocean merges seamlessly with his coat, telephone poles fading into the fog. Hyper-realistic eyes, gritty texture,
+                    cinematic tones, ultra-detailed, 8K" class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt9.png" alt="Tool 9">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By RG Graphic</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com" data-prompt="Use my photo uploaded (keep original face), A high-quality of a stylish my photo with sunglasses, wearing a vibrant blue hoodie and khaki cargo pants. He is sitting casually and 
+                    stepping out of a giant, floating 3D social media profile frame. One leg is extended forward toward
+                    the camera, showing the detailed colorful sole of a modern sneaker in a forced perspective 
+                    pop-out effect. The background behind the frame is a dreamy, colorful bokeh of blue, pink, and
+                    orange lights. The profile frame includes a verified blue checkmark, profile name 'Sokraksa' , and
+                    realistic social media icons for likes and comments at the bottom. Hyper-realistic, cinematic
+                    lighting, 8k resolution." class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt3.png" alt="Tool 3">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Sokraksa</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="A photorealistic portrait of a stylish person. The face is held evenly upright. The person is wearing a black denim jacket, off-white T-shirts, black cargo pants, and white sneakers. They have a genuine and mischievous expression, gently leaning on the shoulder of a giant, lifelike Mickey Mouse, while a playful 3D Pluto sits mischievously next to Mickey."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt27.png" alt="Tool 27">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Bikram Jeet</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Row 10 -->
+                <a href="https://gemini.google.com"
+                    data-prompt="A young men, smiling, peers curiously from behind a dark blue, half-open door. Surrounding him, also peering out, are the characters Mario (with his red cap and mustache), Doraemon (the blue robot cat with the bell), Tom (the gray cat with green eyes and a wary expression), Jerry (the smiling brown mouse with his arms outstretched), Longlegs (a gray rabbit with a carrot in his hand), Taz Mania (the Tasmanian devil with his windmill from the waist down),Sylvester Sylvester (a mischievous black cat), and Tweety (the large-headed yellow canary). All clearly visible. The child should be the focal point, with the characters slightly behind or around him, all with expressions of curiosity and surprise, as if they were spying on something together. The lighting is dramatic and cinematic, coming from one side, creating soft, realistic shadows. The cartoon characters' images must be rendered in a photorealistic 3D style, with extremely detailed textures textures in the fur, clothing, skin, and wood of the door, without visual aberrations or blurry elements. The depth of field must be clear on all characters and the child, with a slight blur in the dark background to highlight the foreground. No aspect ratio errors or digital artifacts. Professional studio quality."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt28.png" alt="Tool 28">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY Graphics Solution Tricks</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="Using the photo uploaded (keeping my original face), with the exact same face, facial features, skin tone, hairstyle, and body proportions as the reference image, with absolute reference accuracy and no changes or reinterpretation, standing next to a large animated Tom Cat character from the Tom & Jerry franchise.
+The person has a neutral expression and is wearing a white sweater featuring the text “TOM & JERRY Friend of Moka” along with cartoon illustrations of Tom and Jerry, blue pants, and white Converse sneakers. The pose matches the reference image exactly, with weight on one leg, leaning naturally against Tom.
+Jerry Mouse is perched on the person’s shoulder. Tom Cat is fully detailed with high-quality animated fur, playfully posing while facing the viewer.
+The background is a clean studio-style gradient of muted blue and gray. Soft, even lighting highlights all subjects, preserves accurate colors, and enhances clarity without altering facial or body details.
+Overall style: cheerful, vibrant promotional image, lighthearted mood, strict reference accuracy, no exaggeration, no stylization changes, no face or body modification."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt6.png" alt="Tool 6">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">By Sokraksa</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://gemini.google.com"
+                    data-prompt="A hyper-realistic, 8k, high-angle medium shot captures a surreal office desk scene with a shallow depth of field, emphasizing the foreground subject. The primary subject is a tiny person, approximately 1:10 scale, with uploaded face as reference, sitting cross-legged on a giant black computer keyboard. The person wears black over-ear headphones, a vibrant patterned short-sleeve button-up shirt, blue jeans, and grey sneakers, holding a miniature silver laptop in one hand and a tiny white coffee cup in the other, looking directly at the viewer with a slight smirk. The oversized keyboard features realistic key textures and subtle coffee stains. Behind the keyboard, a spiral-bound notebook with &quot; tomorrow: prompt's At 1am !&quot; handwritten on it and a pen are visible. To the left, a large black computer monitor displays a light-themed file explorer interface, with a yellow sticky note featuring a hand-drawn smiley face attached to its bottom left bezel. To the right, an enormous white ceramic coffee mug with &quot;@Miatral AI&quot; text is filled with dark coffee. The light wooden desk surface is cluttered with scattered papers, a spilled miniature coffee cup creating a brown stain, paper clips, and coiled black cables, including a USB cable and a black computer mouse connected by a wire that extends towards the tiny person's feet. The scene is bathed in bright, diffused natural lighting from an unseen window, creating soft shadows and highlights, with a subtly blurred office background. The image features cinematic lighting and highly detailed textures throughout."
+                    class="big-card-link">
+                    <div class="big-card long">
+                        <div class="card-icon-container">
+                            <img src="images/imageprompt30.png" alt="Tool 30">
+                        </div>
+                        <div class="big-card-text">
+                            <span class="owner-tag">BY officialbilalx</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p class="copyright">© 2025 sameera official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor" />
+        </svg>
+    </a>
+
+    <!-- Prompt Copy Notification Toast -->
+    <div id="promptToast" class="prompt-toast">PROMPT COPIED!</div>
+
+    <script>
+        document.querySelectorAll('.big-card-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const prompt = this.getAttribute('data-prompt');
+                const geminiUrl = this.getAttribute('href');
+
+                // Copy to clipboard
+                navigator.clipboard.writeText(prompt).then(() => {
+                    // Show toast
+                    const toast = document.getElementById('promptToast');
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        // Open Gemini in a new tab after a brief delay
+                        window.open(geminiUrl, '_blank');
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+    <script src="sameera-scripts.js"></script>
+</body>
+
+</html>

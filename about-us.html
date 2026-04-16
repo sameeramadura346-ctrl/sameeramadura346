@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="sameera-style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QH6Z3VRWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6QH6Z3VRWB');
+    </script>
+</head>
+
+<body id="top">
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+                <li><a href="live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="our-tools.html" class="nav-link">Our Tools</a></li>
+                <li><a href="about-us.html" class="nav-link active">About Us</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main style="padding-top: 100px;">
+        <!-- About Section -->
+        <section class="about" id="about">
+            <h2 class="section-title">About Sameera</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Pioneering the Digital Frontier</h2>
+                    <p>Our platform was built on the belief that everyone should have effortless access to the most
+                        impactful tools available today. We serve as the indispensable bridge connecting you to a
+                        comprehensive ecosystem of resources, encompassing the disruptive power of Artificial
+                        Intelligence
+                        (AI) alongside the robust reliability of traditional non-AI applications..</p>
+                    <p>By hand-selecting and organizing these assets, we eliminate the endless search, ensuring you are
+                        immediately equipped with the strategic instruments necessary to maximize your potential,
+                        streamline
+                        complex workflows, and stay ahead in a rapidly evolving technological world.</p>
+                </div>
+                <div class="about-visual">
+                    <div class="about-graphic"></div>
+                </div>
+            </div>
+
+            <!-- Second row with reversed layout -->
+            <div class="about-content" style="margin-top: 80px;">
+                <div class="about-visual">
+                    <div class="about-graphic-alt">
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                        <div class="hexagon"></div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>Innovation at Every Level</h2>
+                    <p>In a saturated marketplace, the real challenge isn't finding tools, but finding the right ones.
+                        Our
+                        commitment to excellence goes beyond simple listing; it is powered by a rigorous, four-stage
+                        curation process. We subject every application—from the most sophisticated AI models to the most
+                        dependable non-AI utilities—to a stringent evaluation focused on three core pillars:
+                        performance,
+                        user experience, and real-world utility.</p>
+                    <p>Every resource—whether it's advanced AI software or a proven non-AI utility is rigorously tested
+                        and
+                        audited against the highest standards of reliability and real-world utility. This meticulous
+                        approach ensures that only tools of verified quality and actionable innovation are added,
+                        equipping
+                        you with a strategic advantage right from the start.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact" style="margin-top: 100px;">
+            <h2 class="section-title">Send Your Feedback</h2>
+            <p class="section-subtitle">If you'd like us to add any tools, feel free to let us know.</p>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mblnkzyp" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <h3>Connect With Us</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-details">
+                            <h4>Email</h4>
+                            <p>contact.sameeraofficial@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📱</div>
+                        <div class="info-details">
+                            <h4>Phone</h4>
+                            <p>+94 73 1234 567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-details">
+                            <h4>Location</h4>
+                            <p>Colombo, Sri Lanka</p>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63371.8151251542!2d79.8562055!3d6.92183865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo!5e0!3m2!1sen!2slk!4v1766365876625!5m2!1sen!2slk"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p class="copyright">© 2025 sameera official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor" />
+        </svg>
+    </a>
+
+    <script src="sameera-scripts.js"></script>
+</body>
+
+</html>

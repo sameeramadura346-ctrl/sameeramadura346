@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Hub - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="sameera-style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QH6Z3VRWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6QH6Z3VRWB');
+    </script>
+</head>
+
+<body id="top">
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="prompt-hub.html" class="nav-link active">Prompt Hub</a></li>
+                <li><a href="live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="our-tools.html" class="nav-link">Our Tools</a></li>
+                <li><a href="about-us.html" class="nav-link">About Us</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+        <section class="features" style="width: 100%; max-width: 1200px;">
+            <h2 class="section-title">PROMPT HUB</h2>
+
+            <div class="big-cards-grid">
+                <!-- Card 1 -->
+                <a href="image-generation.html" class="big-card-link">
+                    <div class="big-card">
+                        <div class="card-icon-container">
+                            <img src="images/image-generation.png" alt="Image Generation">
+                        </div>
+                        <div class="big-card-text">IMAGE GENERATION</div>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="video-generation.html" class="big-card-link">
+                    <div class="big-card">
+                        <div class="card-icon-container">
+                            <img src="images/video-generation.png" alt="Video Generation">
+                        </div>
+                        <div class="big-card-text">VIDEO GENERATION</div>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="creative-writing.html" class="big-card-link">
+                    <div class="big-card">
+                        <div class="card-icon-container">
+                            <img src="images/Creative-Writing.png" alt="Text to Speech">
+                        </div>
+                        <div class="big-card-text">Creative Writing</div>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="productivity.html" class="big-card-link">
+                    <div class="big-card">
+                        <div class="card-icon-container">
+                            <img src="images/Productivity.png" alt="AI Chat">
+                        </div>
+                        <div class="big-card-text">Productivity</div>
+                    </div>
+                </a>
+            </div>
+
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p class="copyright">© 2025 sameera official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#top" class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor" />
+        </svg>
+    </a>
+
+    <script src="sameera-scripts.js"></script>
+</body>
+
+</html>
