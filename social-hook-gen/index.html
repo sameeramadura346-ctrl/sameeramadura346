@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Hook Generator - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../sameera-style.css" rel="stylesheet">
+    <style>
+        .hook-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hook-style-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .style-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Rajdhani';
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .style-btn.active {
+            background: rgba(255, 0, 255, 0.15);
+            border-color: #FF00FF;
+            color: #FF00FF;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        }
+
+        #topic-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            font-family: 'Rajdhani';
+            font-size: 1.1rem;
+            resize: none;
+        }
+
+        .results-area {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .platform-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .platform-card:hover {
+            transform: translateX(5px);
+        }
+
+        .platform-tag {
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hook-text {
+            color: #fff;
+            font-family: 'Rajdhani';
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron';
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #FF00FF33;
+            border-color: #FF00FF;
+        }
+
+        .gen-btn {
+            background: linear-gradient(45deg, #FF00FF, #00B2FF);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron';
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .gen-btn:hover {
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 968px) {
+            .hook-container {
+                grid-template-columns: 1fr;
+                margin: 80px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00" />
+                            <stop offset="100%" style="stop-color:#00B2FF" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hook-container">
+            <div class="input-area">
+                <h1 class="section-title" style="font-size: 2.2rem; text-align: left; margin-bottom: 5px;">SOCIAL HOOK
+                    GEN</h1>
+                <p style="font-family: 'Rajdhani'; color: rgba(255,255,255,0.6); margin-bottom: 25px;">Stop the scroll
+                    with neural-charged engagement hooks.</p>
+
+                <label style="font-family: 'Orbitron'; font-size: 0.8rem; color: #FF00FF; letter-spacing: 1px;">CORE
+                    TOPIC / PRODUCT</label>
+                <textarea id="topic-input" rows="4"
+                    placeholder="e.g. A new AI tool for designers that generates 3D logos..."></textarea>
+
+                <label style="font-family: 'Orbitron'; font-size: 0.8rem; color: #FF00FF; letter-spacing: 1px;">HOOK
+                    STYLE</label>
+                <div class="hook-style-grid">
+                    <div class="style-btn active" data-style="controversial">🔥 CONTROVERSIAL</div>
+                    <div class="style-btn" data-style="curiosity">👀 CURIOSITY</div>
+                    <div class="style-btn" data-style="listicle">🔢 LISTICLE</div>
+                    <div class="style-btn" data-style="story">📖 STORYTELLING</div>
+                </div>
+
+                <button class="gen-btn" id="generate-hooks">GENERATE NEURAL HOOKS</button>
+            </div>
+
+            <div class="results-area">
+                <!-- X Card -->
+                <div class="platform-card">
+                    <div class="platform-tag" style="color: #1DA1F2;"><span>𝕏</span> TWITTER / X STYLE</div>
+                    <div class="hook-text" id="hook-x">Results will appear here...</div>
+                    <button class="copy-btn">COPY HOOK</button>
+                </div>
+
+                <!-- LinkedIn Card -->
+                <div class="platform-card">
+                    <div class="platform-tag" style="color: #0A66C2;"><span>in</span> LINKEDIN PROFESSIONAL</div>
+                    <div class="hook-text" id="hook-li">Neural processing waiting...</div>
+                    <button class="copy-btn">COPY HOOK</button>
+                </div>
+
+                <!-- Instagram Card -->
+                <div class="platform-card">
+                    <div class="platform-tag" style="color: #E1306C;"><span>📸</span> INSTAGRAM REEL HOOK</div>
+                    <div class="hook-text" id="hook-ig">Ready for input...</div>
+                    <button class="copy-btn">COPY HOOK</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../sameera-scripts.js"></script>
+    <script src="social-hook-gen.js"></script>
+</body>
+
+</html>

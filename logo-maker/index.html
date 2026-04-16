@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SVG Logo Maker - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../sameera-style.css" rel="stylesheet">
+    <style>
+        .logo-maker-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 40px;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .maker-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .label-text {
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            color: #FF5E00;
+            text-transform: uppercase;
+        }
+
+        select,
+        input[type="text"] {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-family: 'Rajdhani';
+            font-size: 1rem;
+        }
+
+        .canvas-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            border: 1px dashed rgba(255, 94, 0, 0.3);
+            min-height: 500px;
+            position: relative;
+        }
+
+        #logo-preview {
+            width: 300px;
+            height: 300px;
+            filter: drop-shadow(0 0 20px rgba(255, 94, 0, 0.3));
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron';
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 94, 0, 0.5);
+        }
+
+        .color-pickers {
+            display: flex;
+            gap: 15px;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        input[type="color"] {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        @media (max-width: 968px) {
+            .logo-maker-container {
+                grid-template-columns: 1fr;
+                margin: 80px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00" />
+                            <stop offset="100%" style="stop-color:#00B2FF" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron" font-weight="900" font-size="18">S</text>
+                </svg>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="../index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="../prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+                    <li><a href="../live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                    <li><a href="../our-tools.html" class="nav-link">Our Tools</a></li>
+                    <li><a href="../about-us.html" class="nav-link">About Us</a></li>
+                </ul>
+                <button class="music-toggle" id="musicToggle" title="Play Music">
+                    <svg class="play-icon" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <svg class="stop-icon" viewBox="0 0 24 24">
+                        <path d="M6 6h12v12H6z" />
+                    </svg>
+                </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="logo-maker-container">
+            <div class="maker-controls">
+                <h1 class="section-title" style="font-size: 2rem; text-align: left; margin-bottom: 20px;">SVG LOGO MAKER
+                </h1>
+
+                <div class="control-group">
+                    <label class="label-text">BASE SHAPE</label>
+                    <select id="base-shape">
+                        <option value="hexagon">Hexagon</option>
+                        <option value="circle">Cyber Circle</option>
+                        <option value="shield">Protector Shield</option>
+                        <option value="square">Diamond Square</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="label-text">INNER ICON</label>
+                    <select id="inner-icon">
+                        <option value="bolt">Flash Bolt</option>
+                        <option value="code">Source Code</option>
+                        <option value="fire">Thermal Flare</option>
+                        <option value="star">Nova Star</option>
+                        <option value="heart">Biometric Heart</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="label-text">COLORS (PRIMARY & ACCENT)</label>
+                    <div class="color-pickers">
+                        <div class="color-input-wrapper">
+                            <input type="color" id="primary-color" value="#FF5E00">
+                        </div>
+                        <div class="color-input-wrapper">
+                            <input type="color" id="accent-color" value="#00B2FF">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="label-text">IDENTITY TEXT (OPTIONAL)</label>
+                    <input type="text" id="logo-text" placeholder="SAM-01" maxlength="6">
+                </div>
+
+                <button class="action-btn" id="export-btn">EXPORT AS SVG</button>
+            </div>
+
+            <div class="canvas-area">
+                <div id="logo-preview">
+                    <!-- SVG will be injected here -->
+                </div>
+                <div
+                    style="margin-top: 30px; font-family: 'Orbitron'; font-size: 0.7rem; color: #00B2FF; letter-spacing: 2px;">
+                    LIVE HOLOGRAPHIC PREVIEW
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="logo-maker.js"></script>
+</body>
+
+</html>

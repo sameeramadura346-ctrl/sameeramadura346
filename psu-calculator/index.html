@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced PSU Calculator - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../sameera-style.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00B2FF;
+            --secondary: #FF5E00;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        .calculator-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: #fff;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .calc-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 178, 255, 0.3);
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sticky-result {
+                position: relative !important;
+                top: 0 !important;
+            }
+        }
+
+        .sections-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .section-box {
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease;
+        }
+
+        .section-box:hover {
+            border-color: rgba(0, 178, 255, 0.4);
+        }
+
+        .section-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        select,
+        input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: var(--primary);
+            background: rgba(0, 178, 255, 0.05);
+        }
+
+        /* Fix for invisible dropdown options on some browsers */
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .sticky-result {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: linear-gradient(135deg, rgba(255, 94, 0, 0.1), rgba(0, 178, 255, 0.1));
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .wattage-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 15px 0;
+            text-shadow: 0 0 20px rgba(0, 178, 255, 0.4);
+        }
+
+        .rec-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .rec-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .rec-value {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 30px;
+            padding: 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        /* Stats styles */
+        .stat-bar {
+            height: 4px;
+            background: var(--glass);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+
+<body id="top">
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home" class="nav-link">Home</a></li>
+                <li><a href="../prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+                <li><a href="../live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="../our-tools.html" class="nav-link active">Our Tools</a></li>
+                <li><a href="../about-us.html" class="nav-link">About Us</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="calculator-container">
+        <h1 class="calc-title">ADVANCED PSU CALCULATOR</h1>
+
+        <div class="grid-layout">
+            <div class="sections-container">
+                <!-- CPU SECTION -->
+                <div class="section-box">
+                    <div class="section-header">CPU / PROCESSOR</div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label>Brand</label>
+                            <select id="cpuBrand" onchange="updateCPUSockets()">
+                                <option value="">Select Brand</option>
+                                <option value="intel">Intel</option>
+                                <option value="amd">AMD</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Socket</label>
+                            <select id="cpuSocket" onchange="updateCPUModels()">
+                                <option value="">Select Socket</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Model</label>
+                            <select id="cpuModel" onchange="calculate()">
+                                <option value="0">Select Model</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOTHERBOARD SECTION -->
+                <div class="section-box">
+                    <div class="section-header">MOTHERBOARD</div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label>Form Factor</label>
+                            <select id="mobo" onchange="calculate()">
+                                <option value="30">Mini-ITX / Mini-DTX (30W)</option>
+                                <option value="50" selected>ATX / Micro-ATX (50W)</option>
+                                <option value="80">XL-ATX / E-ATX (80W)</option>
+                                <option value="120">Server / Dual Socket (120W)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPU SECTION -->
+                <div class="section-box">
+                    <div class="section-header">GPU (GRAPHICS CARD)</div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label>Brand</label>
+                            <select id="gpuBrand" onchange="updateGPUModels()">
+                                <option value="">Select Brand</option>
+                                <option value="nvidia">NVIDIA</option>
+                                <option value="amd">AMD</option>
+                                <option value="intel">Intel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Model</label>
+                            <select id="gpuModel" onchange="calculate()">
+                                <option value="0">Select Model</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" id="gpuQty" value="1" min="0" max="4" onchange="calculate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RAM SECTION -->
+                <div class="section-box">
+                    <div class="section-header">RAM (MEMORY)</div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label>Module Type</label>
+                            <select id="ramType" onchange="calculate()">
+                                <option value="3">DDR4 / DDR5 Standard (3W)</option>
+                                <option value="7">High-Perf RGB / Overclocked (7W)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity (Sticks)</label>
+                            <input type="number" id="ramQty" value="2" min="1" max="8" onchange="calculate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STORAGE SECTION -->
+                <div class="section-box">
+                    <div class="section-header">STORAGE</div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label>NVMe / M.2 SSD</label>
+                            <input type="number" id="nvmeQty" value="1" min="0" max="8" onchange="calculate()">
+                        </div>
+                        <div class="form-group">
+                            <label>SATA SSD</label>
+                            <input type="number" id="sataSsdQty" value="0" min="0" max="8" onchange="calculate()">
+                        </div>
+                        <div class="form-group">
+                            <label>HDD (7.2k RPM)</label>
+                            <input type="number" id="hddQty" value="0" min="0" max="8" onchange="calculate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COOLING SECTION -->
+                <div class="section-box">
+                    <div class="section-header">FANS & COOLING</div>
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label>Case Fans (RGB)</label>
+                            <input type="number" id="fanQty" value="3" min="0" max="20" onchange="calculate()">
+                        </div>
+                        <div class="form-group">
+                            <label>CPU Cooler</label>
+                            <select id="coolingType" onchange="calculate()">
+                                <option value="5">Air Cooler - Low Profile (5W)</option>
+                                <option value="15">Air Cooler - High Performance (15W)</option>
+                                <option value="25">Liquid AIO (120/240mm) (25W)</option>
+                                <option value="40">Liquid AIO (360mm+) (40W)</option>
+                                <option value="60">Custom Loop / Dual Pump (60W)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky-result">
+                <div style="font-family: 'Rajdhani', sans-serif; font-weight: 600; color: #888;">LOAD WATTAGE</div>
+                <div id="totalWattage" class="wattage-display">0W</div>
+                <div class="stat-bar">
+                    <div id="wattageBar" class="stat-fill"></div>
+                </div>
+
+                <div class="rec-box">
+                    <div class="rec-label">RECOMMENDED POWER SUPPLY</div>
+                    <div id="recPsu" class="rec-value">-</div>
+                </div>
+
+                <div style="font-size: 0.75rem; color: #666; margin-top: 15px; line-height: 1.4;">
+                    *Includes safe overhead (25-30%) for transient spikes and optimal efficiency.
+                </div>
+
+                <a href="../our-tools.html" class="back-btn">RETURN TO HUB</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../sameera-scripts.js"></script>
+    <script>
+        const cpuData = {
+            intel: {
+                "LGA 1851 (Core Ultra 200)": {
+                    "Core Ultra 9 285K": 250,
+                    "Core Ultra 7 265K": 250,
+                    "Core Ultra 5 245K": 159
+                },
+                "LGA 1700 (12th-14th Gen)": {
+                    "Core i9-14900KS": 320,
+                    "Core i9-14900K/KF": 253,
+                    "Core i7-14700K/KF": 253,
+                    "Core i5-14600K/KF": 181,
+                    "Core i3-14100": 60,
+                    "Core i9-13900K/KF": 253,
+                    "Core i7-13700K/KF": 253,
+                    "Core i5-13600K/KF": 181,
+                    "Core i5-13400": 65,
+                    "Core i9-12900K/KF": 241,
+                    "Core i7-12700K/KF": 190,
+                    "Core i5-12600K/KF": 150,
+                    "Core i5-12400": 65,
+                    "Core i3-12100": 60
+                },
+                "LGA 1200 (10th/11th Gen)": {
+                    "Core i9-11900K": 125,
+                    "Core i7-11700K": 125,
+                    "Core i5-11600K": 125,
+                    "Core i9-10900K": 125,
+                    "Core i7-10700K": 125,
+                    "Core i5-10600K": 125,
+                    "Core i3-10100": 65
+                },
+                "LGA 1151 (8th/9th Gen)": {
+                    "Core i9-9900K": 95,
+                    "Core i7-9700K": 95,
+                    "Core i5-9600K": 95,
+                    "Core i7-8700K": 95,
+                    "Core i5-8600K": 95,
+                    "Core i3-8100": 65
+                }
+            },
+            amd: {
+                "AM5 (Ryzen 7000/9000)": {
+                    "Ryzen 9 9950X": 170,
+                    "Ryzen 9 9900X": 120,
+                    "Ryzen 7 9700X": 65,
+                    "Ryzen 5 9600X": 65,
+                    "Ryzen 9 7950X3D": 120,
+                    "Ryzen 7 7800X3D": 120,
+                    "Ryzen 9 7950X": 170,
+                    "Ryzen 9 7900X": 170,
+                    "Ryzen 7 7700X": 105,
+                    "Ryzen 5 7600X": 105,
+                    "Ryzen 7 7700": 65,
+                    "Ryzen 5 7600": 65
+                },
+                "AM4 (Ryzen 3000/5000)": {
+                    "Ryzen 9 5950X": 105,
+                    "Ryzen 9 5900X": 105,
+                    "Ryzen 7 5800X3D": 105,
+                    "Ryzen 7 5800X": 105,
+                    "Ryzen 5 5600X": 65,
+                    "Ryzen 5 5500": 65,
+                    "Ryzen 9 3950X": 105,
+                    "Ryzen 9 3900X": 105,
+                    "Ryzen 7 3800X": 105,
+                    "Ryzen 7 3700X": 65,
+                    "Ryzen 5 3600": 65
+                }
+            }
+        };
+
+        const gpuData = {
+            nvidia: {
+                "RTX 5090 (Projected)": 600,
+                "RTX 4090": 450,
+                "RTX 4080 Super": 320,
+                "RTX 4080": 320,
+                "RTX 4070 Ti Super": 285,
+                "RTX 4070 Ti": 285,
+                "RTX 4070 Super": 220,
+                "RTX 4070": 200,
+                "RTX 4060 Ti": 160,
+                "RTX 4060": 115,
+                "RTX 3090 Ti": 450,
+                "RTX 3090": 350,
+                "RTX 3080 Ti": 350,
+                "RTX 3080": 320,
+                "RTX 3070 Ti": 290,
+                "RTX 3070": 220,
+                "RTX 3060 Ti": 200,
+                "RTX 3060": 170,
+                "RTX 2080 Ti": 250,
+                "RTX 2080": 215,
+                "GTX 1660 Super": 125,
+                "GTX 1080 Ti": 250
+            },
+            amd: {
+                "RX 7900 XTX": 355,
+                "RX 7900 XT": 315,
+                "RX 7800 XT": 263,
+                "RX 7700 XT": 245,
+                "RX 7600 XT": 190,
+                "RX 7600": 165,
+                "RX 6950 XT": 335,
+                "RX 6900 XT": 300,
+                "RX 6800 XT": 300,
+                "RX 6800": 250,
+                "RX 6750 XT": 250,
+                "RX 6700 XT": 230,
+                "RX 6650 XT": 180,
+                "RX 6600 XT": 160,
+                "RX 6600": 132,
+                "RX 5700 XT": 225,
+                "RX 5700": 180,
+                "RX 5600 XT": 150
+            },
+            intel: {
+                "Arc A770": 225,
+                "Arc A750": 225,
+                "Arc A580": 175,
+                "Arc A380": 75
+            }
+        };
+
+        function updateCPUSockets() {
+            const brand = document.getElementById('cpuBrand').value;
+            const socketSel = document.getElementById('cpuSocket');
+            socketSel.innerHTML = '<option value="">Select Socket</option>';
+
+            if (brand) {
+                Object.keys(cpuData[brand]).forEach(socket => {
+                    const opt = document.createElement('option');
+                    opt.value = socket;
+                    opt.textContent = socket;
+                    socketSel.appendChild(opt);
+                });
+            }
+            updateCPUModels();
+        }
+
+        function updateCPUModels() {
+            const brand = document.getElementById('cpuBrand').value;
+            const socket = document.getElementById('cpuSocket').value;
+            const modelSel = document.getElementById('cpuModel');
+            modelSel.innerHTML = '<option value="0">Select Model</option>';
+
+            if (brand && socket) {
+                const models = cpuData[brand][socket];
+                Object.keys(models).forEach(model => {
+                    const opt = document.createElement('option');
+                    opt.value = models[model];
+                    opt.textContent = model;
+                    modelSel.appendChild(opt);
+                });
+            }
+            calculate();
+        }
+
+        function updateGPUModels() {
+            const brand = document.getElementById('gpuBrand').value;
+            const modelSel = document.getElementById('gpuModel');
+            modelSel.innerHTML = '<option value="0">Select Model</option>';
+
+            if (brand) {
+                const models = gpuData[brand];
+                Object.keys(models).forEach(model => {
+                    const opt = document.createElement('option');
+                    opt.value = models[model];
+                    opt.textContent = model;
+                    modelSel.appendChild(opt);
+                });
+            }
+            calculate();
+        }
+
+        function calculate() {
+            let total = 0;
+
+            // Parts
+            total += parseInt(document.getElementById('cpuModel').value);
+            total += parseInt(document.getElementById('mobo').value);
+            total += parseInt(document.getElementById('gpuModel').value) * (parseInt(document.getElementById('gpuQty').value) || 0);
+            total += parseInt(document.getElementById('ramType').value) * (parseInt(document.getElementById('ramQty').value) || 0);
+
+            // Storage
+            total += (parseInt(document.getElementById('nvmeQty').value) || 0) * 8;
+            total += (parseInt(document.getElementById('sataSsdQty').value) || 0) * 5;
+            total += (parseInt(document.getElementById('hddQty').value) || 0) * 20;
+
+            // Cooling
+            total += (parseInt(document.getElementById('fanQty').value) || 0) * 3;
+            total += parseInt(document.getElementById('coolingType').value);
+
+            // Interface
+            const display = document.getElementById('totalWattage');
+            display.innerText = total + 'W';
+
+            const bar = document.getElementById('wattageBar');
+            const perc = Math.min((total / 1200) * 100, 100);
+            bar.style.width = perc + '%';
+
+            // Recommendation
+            const rec = Math.ceil((total * 1.3) / 50) * 50;
+            const safeRec = Math.max(rec, 450);
+            document.getElementById('recPsu').innerText = safeRec + 'W 80+ GOLD';
+        }
+
+        // Initialize display
+        calculate();
+    </script>
+</body>
+
+</html>

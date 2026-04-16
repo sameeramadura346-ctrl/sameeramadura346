@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Upscaler - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../sameera-style.css" rel="stylesheet">
+    <style>
+        body {
+            background: #0a0a0a;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .upscaler-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 120px 20px 60px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .upload-box {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px dashed rgba(255, 94, 0, 0.3);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .upload-box.dragging {
+            border-color: #00B2FF;
+            background: rgba(0, 178, 255, 0.05);
+        }
+
+        .upload-box:hover {
+            border-color: #FF5E00;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: #FF5E00;
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .upload-box.processing .upload-icon {
+            animation: pulse-gear 2s infinite;
+            color: #00B2FF;
+        }
+
+        @keyframes pulse-gear {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        .upload-text h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .upload-text p {
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .results-container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .result-item {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .result-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: #FF5E00;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 94, 0, 0.4);
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            max-width: 600px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #FF5E00, #00B2FF);
+            transition: width 0.3s ease;
+        }
+
+        .back-btn {
+            margin-top: 40px;
+            color: #00B2FF;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home" class="nav-link">Home</a></li>
+                <li><a href="../prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+                <li><a href="../live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="../our-tools.html" class="nav-link active">Our Tools</a></li>
+                <li><a href="../about-us.html" class="nav-link">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="upscaler-container">
+        <div class="upload-box" id="dropZone">
+            <div class="upload-icon" id="mainIcon">✦</div>
+            <div class="upload-text">
+                <h3 id="mainTitle">SELECT IMAGE</h3>
+                <p id="mainDesc">Drop your low-res image here or click to browse</p>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="progress-bar-wrap" id="progressWrap">
+            <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+
+        <div class="results-container" id="resultsArea">
+            <div class="result-item">
+                <div class="result-label"><span>Original</span> <span id="origSize"></span></div>
+                <div class="img-wrapper">
+                    <img id="originalImg" src="" alt="Original">
+                </div>
+            </div>
+            <div class="result-item">
+                <div class="result-label"><span>Enhanced (2x)</span> <span id="newSize"></span></div>
+                <div class="img-wrapper" style="border-color: #00B2FF; box-shadow: 0 0 20px rgba(0, 178, 255, 0.1);">
+                    <img id="upscaledImg" src="" alt="Upscaled">
+                </div>
+            </div>
+        </div>
+
+        <button class="download-btn" id="downloadBtn">Download Enhanced Image</button>
+
+        <a href="../our-tools.html" class="back-btn">
+            <span>←</span> BACK TO TOOLS HUB
+        </a>
+    </div>
+
+    <!-- AI Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/upscaler@latest/dist/browser/umd/upscaler.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@1.0.0-beta.12/dist/umd/models/esrgan-slim/src/umd.js"></script>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const resultsArea = document.getElementById('resultsArea');
+        const progressWrap = document.getElementById('progressWrap');
+        const progressFill = document.getElementById('progressFill');
+        const originalImg = document.getElementById('originalImg');
+        const upscaledImg = document.getElementById('upscaledImg');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const mainIcon = document.getElementById('mainIcon');
+        const mainTitle = document.getElementById('mainTitle');
+        const mainDesc = document.getElementById('mainDesc');
+        const origSizeText = document.getElementById('origSize');
+        const newSizeText = document.getElementById('newSize');
+
+        let upscaler;
+
+        // Initialize Upscaler with a slight delay to ensure library is ready
+        async function initUpscaler() {
+            try {
+                // Ensure the ESRGANSlim global is present
+                if (typeof Upscaler === 'undefined' || typeof ESRGANSlim === 'undefined') {
+                    throw new Error("AI libraries not fully loaded. Note: You need an internet connection to load the AI model for the first time.");
+                }
+
+                // Choose the 2x model from the ESRGANSlim object
+                const model = ESRGANSlim.ESRGANSlim2x || ESRGANSlim.default || ESRGANSlim;
+
+                upscaler = new Upscaler({
+                    model: model
+                });
+                console.log("AI Upscaler Initialized successfully with ESRGAN-Slim 2x.");
+            } catch (e) {
+                console.error("Failed to init upscaler", e);
+                mainTitle.innerText = "INIT ERROR";
+                mainDesc.innerText = e.message;
+            }
+        }
+
+        // Run init
+        window.addEventListener('load', initUpscaler);
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag & Drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragging');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragging');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragging');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleImage(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) handleImage(file);
+        });
+
+        function handleImage(file) {
+            if (!upscaler) {
+                alert("AI Engine is still loading. Please wait a moment.");
+                initUpscaler();
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    originalImg.src = img.src;
+                    origSizeText.innerText = `${img.width}x${img.height}`;
+                    newSizeText.innerText = `${img.width * 2}x${img.height * 2}`;
+                    startUpscaling(img);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function startUpscaling(imgElement) {
+            // Reset UI
+            resultsArea.style.display = 'grid';
+            progressWrap.style.display = 'block';
+            progressFill.style.width = '0%';
+            downloadBtn.style.display = 'none';
+            dropZone.classList.add('processing');
+            mainTitle.innerText = "ENHANCING...";
+            mainDesc.innerText = "Please wait, neural processing is in progress.";
+
+            try {
+                const upscaledSrc = await upscaler.upscale(imgElement, {
+                    patchSize: 64,
+                    padding: 4,
+                    progress: (amount) => {
+                        const percent = Math.round(amount * 100);
+                        progressFill.style.width = `${percent}%`;
+                    }
+                });
+
+                upscaledImg.src = upscaledSrc;
+
+                // Done
+                dropZone.classList.remove('processing');
+                mainIcon.innerText = "✓";
+                mainTitle.innerText = "ENHANCEMENT COMPLETE";
+                mainDesc.innerText = "Your image has been optimized by AI.";
+                progressWrap.style.display = 'none';
+                downloadBtn.style.display = 'inline-block';
+
+                downloadBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.download = 'sameera-ai-upscaled.png';
+                    link.href = upscaledSrc;
+                    link.click();
+                };
+
+            } catch (err) {
+                console.error("Upscale error:", err);
+                mainTitle.innerText = "ERROR OCCURRED";
+                mainDesc.innerText = "Neural processing failed. Try a smaller image.";
+                dropZone.classList.remove('processing');
+            }
+        }
+    </script>
+    <script src="../sameera-scripts.js"></script>
+</body>
+
+</html>

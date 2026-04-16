@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="assets/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sameera AI - BG Remover</title>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <script type="module" crossorigin src="assets/index-GrhMcHvu.js"></script>
+  <link rel="stylesheet" crossorigin href="assets/index-vXD887CD.css">
+  <link rel="stylesheet" href="../sameera-style.css">
+  <style>
+    body {
+      background: #0a0a0a !important;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    #root {
+      position: relative;
+      z-index: 5;
+      background: transparent !important;
+      min-height: 100vh;
+      padding-top: 100px;
+      /* Space for navbar */
+    }
+
+    #root>div {
+      background: transparent !important;
+    }
+
+    /* Dark Theme Overrides for Integrated App */
+    #root h1 {
+      color: #ffffff !important;
+      text-shadow: 0 0 10px rgba(255, 94, 0, 0.3);
+      font-family: 'Orbitron', sans-serif !important;
+    }
+
+    #root p {
+      color: #a8c7fa !important;
+      font-family: 'Rajdhani', sans-serif !important;
+    }
+
+    #root .bg-white {
+      background: rgba(10, 10, 10, 0.7) !important;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 94, 0, 0.2) !important;
+      color: #ffffff !important;
+    }
+
+    #root .text-slate-900,
+    #root .text-slate-800,
+    #root .text-gray-900 {
+      color: #ffffff !important;
+    }
+
+    #root .text-slate-600,
+    #root .text-slate-500,
+    #root .text-gray-600 {
+      color: #a8c7fa !important;
+    }
+
+    #root .border-slate-300,
+    #root .border-slate-200,
+    #root .border-gray-200 {
+      border-color: rgba(255, 94, 0, 0.2) !important;
+    }
+
+    #root .bg-slate-50 {
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    #root .hover\:border-slate-400:hover {
+      border-color: #FF5E00 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Animated Grid Background -->
+  <div class="grid-bg"></div>
+  <div class="gradient-overlay"></div>
+  <div class="scanlines"></div>
+
+  <!-- Animated Shapes -->
+  <div class="shapes-container">
+    <div class="shape shape-circle"></div>
+    <div class="shape shape-triangle"></div>
+    <div class="shape shape-square"></div>
+  </div>
+
+  <!-- Floating Particles -->
+  <div id="particles"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html#home" class="logo-link">
+        <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)" stroke-width="2" />
+          <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+            font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+        </svg>
+        <span class="logo-text">SAMEERA</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html#home" class="nav-link">Home</a></li>
+        <li><a href="../prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+        <li><a href="../live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+        <li><a href="../our-tools.html" class="nav-link">Our Tools</a></li>
+        <li><a href="../about-us.html" class="nav-link">About Us</a></li>
+      </ul>
+      <button class="music-toggle" id="musicToggle" title="Play Music">
+        <svg class="play-icon" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        <svg class="stop-icon" viewBox="0 0 24 24">
+          <path d="M6 6h12v12H6z" />
+        </svg>
+      </button>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div id="root"></div>
+
+  <script src="../sameera-scripts.js"></script>
+  <script>
+    // Minimal script for particles and mobile menu to avoid crashes
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        if (Math.random() > 0.5) particle.style.background = '#00B2FF';
+        particlesContainer.appendChild(particle);
+      }
+    }
+    createParticles();
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+    }
+
+    window.addEventListener('scroll', function () {
+      const navbar = document.getElementById('navbar');
+      if (navbar) {
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+
+</html>

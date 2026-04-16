@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistic Image Filters - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../sameera-style.css" rel="stylesheet">
+    <style>
+        .filter-container {
+            max-width: 1400px;
+            margin: 100px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .view-frame {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        #image-display {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: none;
+        }
+
+        .hologram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(255, 94, 0, 0.05) 0%, transparent 50%, rgba(255, 94, 0, 0.05) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .filter-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .preset-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            max-height: 50vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .preset-grid::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .preset-grid::-webkit-scrollbar-thumb {
+            background: #FF5E00;
+            border-radius: 10px;
+        }
+
+        .preset-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .preset-card:hover {
+            background: rgba(255, 94, 0, 0.1);
+            border-color: #FF5E00;
+        }
+
+        .preset-card.active {
+            background: rgba(255, 94, 0, 0.2);
+            border-color: #FF5E00;
+            box-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
+        }
+
+        .preset-name {
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+            color: #FF5E00;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .preset-desc {
+            font-family: 'Rajdhani';
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .control-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .action-btn {
+            padding: 12px;
+            border-radius: 25px;
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-upload {
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            color: white;
+        }
+
+        .btn-download {
+            background: transparent;
+            border: 1px solid #FF5E00;
+            color: #FF5E00;
+        }
+
+        .btn-download:hover {
+            background: #FF5E00;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.4);
+        }
+
+        @media (max-width: 1100px) {
+            .filter-container {
+                grid-template-columns: 1fr;
+                margin: 80px 20px;
+            }
+
+            .view-frame {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40">
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="#FF5E00" stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="#FF5E00"
+                        font-family="Orbitron" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../our-tools.html" class="active">Our Tools</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="filter-container">
+            <div class="view-frame" id="drop-zone">
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+                <div class="hologram-overlay"></div>
+                <img id="image-display" src="" alt="" style="display: none;">
+                <div id="placeholder-text"
+                    style="text-align: center; font-family: 'Orbitron'; color: rgba(255,255,255,0.3);">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🖼️</div>
+                    <p>DRAG & DROP OR CLICK TO UPLOAD</p>
+                </div>
+            </div>
+
+            <div class="filter-sidebar">
+                <div class="control-panel">
+                    <button class="action-btn btn-upload" onclick="document.getElementById('file-input').click()">CHOOSE
+                        IMAGE</button>
+                    <button class="action-btn btn-download" id="download-btn" disabled>EXPORT RENDER</button>
+                </div>
+
+                <label style="font-family: 'Orbitron'; font-size: 0.8rem; color: #00B2FF; letter-spacing: 2px;">NEURAL
+                    PRESETS</label>
+                <div class="preset-grid" id="preset-list">
+                    <div class="preset-card active" data-filter="none">
+                        <span class="preset-name">Raw Input</span>
+                        <span class="preset-desc">No neural processing applied.</span>
+                    </div>
+                    <div class="preset-card" data-filter="cyberpunk">
+                        <span class="preset-name">Cyberpunk</span>
+                        <span class="preset-desc">Magenta tints & high contrast neon.</span>
+                    </div>
+                    <div class="preset-card" data-filter="vaporwave">
+                        <span class="preset-name">Vaporwave</span>
+                        <span class="preset-desc">Pastel dreamscape & low contrast.</span>
+                    </div>
+                    <div class="preset-card" data-filter="emerald">
+                        <span class="preset-name">Matrix Hub</span>
+                        <span class="preset-desc">Emerald green digital rain aesthetic.</span>
+                    </div>
+                    <div class="preset-card" data-filter="noir">
+                        <span class="preset-name">Deep Noir</span>
+                        <span class="preset-desc">Inky blacks & sharp monochrome.</span>
+                    </div>
+                    <div class="preset-card" data-filter="infrared">
+                        <span class="preset-name">Infrared</span>
+                        <span class="preset-desc">Heat-map thermal spectrum.</span>
+                    </div>
+                    <div class="preset-card" data-filter="glitch">
+                        <span class="preset-name">Holo-Glitch</span>
+                        <span class="preset-desc">Offset colors & scanline blur.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <canvas id="export-canvas" style="display: none;"></canvas>
+
+    <script src="../sameera-scripts.js"></script>
+    <script src="filters.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistic QR Generator - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../sameera-style.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <style>
+        .qr-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-family: 'Orbitron';
+            font-size: 0.9rem;
+            color: #FF5E00;
+            text-transform: uppercase;
+        }
+
+        .input-group input,
+        .input-group select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Rajdhani';
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #FF5E00;
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 94, 0, 0.3);
+        }
+
+        .preview-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px dashed rgba(255, 94, 0, 0.3);
+        }
+
+        #canvas-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .color-presets {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: transform 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Orbitron';
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 94, 0, 0.6);
+        }
+
+        @media (max-width: 968px) {
+            .qr-container {
+                grid-template-columns: 1fr;
+                margin: 80px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+    <!-- Animated Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Animated Shapes -->
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home" class="nav-link">Home</a></li>
+                <li><a href="../prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+                <li><a href="../live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
+                <li><a href="../our-tools.html" class="nav-link active">Our Tools</a></li>
+                <li><a href="../about-us.html" class="nav-link">About Us</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="qr-container">
+            <div class="controls">
+                <h1 class="section-title" style="font-size: 2rem; text-align: left; margin-bottom: 20px;">QR ARTIST</h1>
+
+                <div class="input-group">
+                    <label>CONTENT (URL OR TEXT)</label>
+                    <input type="text" id="qr-data" placeholder="https://sameera-official.com"
+                        value="https://sameera-official.com">
+                </div>
+
+                <div class="input-group">
+                    <label>DOT STYLE</label>
+                    <select id="dot-style">
+                        <option value="square">Classic Square</option>
+                        <option value="dots">Rounded Dots</option>
+                        <option value="rounded">Rounded Squares</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                        <option value="classy">Classy</option>
+                        <option value="classy-rounded">Classy Rounded</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>EYE STYLE</label>
+                    <select id="eye-style">
+                        <option value="square">Square</option>
+                        <option value="rounded">Rounded</option>
+                        <option value="extra-rounded">Extra Rounded</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>FOREGROUND COLOR</label>
+                    <div class="color-presets">
+                        <div class="color-btn" style="background: #000000;" data-color="#000000"></div>
+                        <div class="color-btn" style="background: #FF5E00;" data-color="#FF5E00"></div>
+                        <div class="color-btn" style="background: #00B2FF;" data-color="#00B2FF"></div>
+                        <div class="color-btn" style="background: #7000FF;" data-color="#7000FF"></div>
+                        <input type="color" id="qr-color" value="#000000"
+                            style="width: 30px; height: 30px; padding: 0; border: none; cursor: pointer;">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>UPLOAD CENTER LOGO (OPTIONAL)</label>
+                    <input type="file" id="logo-upload" accept="image/*">
+                </div>
+            </div>
+
+            <div class="preview-area">
+                <div id="canvas-container"></div>
+                <button class="download-btn" id="download-btn">Download PNG</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms-of-service.html">Terms of Service</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p class="copyright">© 2025 sameera official. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../sameera-scripts.js"></script>
+    <script src="qr-script.js"></script>
+</body>
+
+</html>
