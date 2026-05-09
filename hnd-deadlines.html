@@ -1,17 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HND Assignment Deadlines - Sameera Official</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link href="templatemo-electric-xtra.css" rel="stylesheet">
     <style>
+        /* ══════════════════════════════
+           PASSWORD OVERLAY
+        ══════════════════════════════ */
+        #pwOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #pwOverlay.hidden {
+            display: none;
+        }
+
+        .pw-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.35);
+            border-radius: 18px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 0 60px rgba(255, 94, 0, 0.15), 0 0 120px rgba(0, 178, 255, 0.08);
+            animation: pw-appear 0.6s cubic-bezier(.16, 1, .3, 1) both;
+        }
+
+        @keyframes pw-appear {
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .pw-lock-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+            animation: pw-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes pw-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .pw-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .pw-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        .pw-input-wrap {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        #pwInput {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 94, 0, 0.35);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #pwInput:focus {
+            border-color: #FF5E00;
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.3);
+        }
+
+        #pwInput.error {
+            border-color: #ff1744;
+            box-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
+            animation: pw-shake 0.4s ease;
+        }
+
+        @keyframes pw-shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-8px);
+            }
+
+            40% {
+                transform: translateX(8px);
+            }
+
+            60% {
+                transform: translateX(-5px);
+            }
+
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        .pw-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .pw-toggle:hover {
+            color: #FF5E00;
+        }
+
+        #pwBtn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 30px rgba(255, 94, 0, 0.3);
+        }
+
+        #pwBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(255, 94, 0, 0.5);
+        }
+
+        #pwBtn:active {
+            transform: scale(0.97);
+        }
+
+        #pwError {
+            margin-top: 14px;
+            color: #ff1744;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            min-height: 20px;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #pwError.show {
+            opacity: 1;
+        }
+
+        .pw-attempts {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.25);
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Overlay grid bg */
+        #pwOverlay .grid-bg,
+        #pwOverlay .gradient-overlay {
+            position: fixed;
+            display: block;
+        }
+
+        /* unlock animation */
+        .pw-box.unlocking {
+            animation: pw-unlock 0.5s ease forwards;
+        }
+
+        @keyframes pw-unlock {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+                box-shadow: 0 0 80px rgba(0, 230, 118, 0.5);
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+        }
+
         /* ── Page Header ── */
         .deadlines-hero {
             padding: 120px 20px 60px;
             text-align: center;
         }
+
         .deadlines-hero h1 {
             font-family: 'Orbitron', monospace;
             font-size: clamp(2rem, 6vw, 4rem);
@@ -24,8 +262,9 @@
             letter-spacing: 0.1em;
             animation: glow 2s ease-in-out infinite;
         }
+
         .deadlines-hero p {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 1.1rem;
             margin-top: 12px;
             font-family: 'Rajdhani', sans-serif;
@@ -43,8 +282,8 @@
 
         /* ── Subject Card ── */
         .subject-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,94,0,0.25);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.25);
             border-radius: 16px;
             padding: 32px 24px;
             backdrop-filter: blur(12px);
@@ -52,36 +291,59 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .subject-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(255,94,0,0.25);
+            box-shadow: 0 20px 60px rgba(255, 94, 0, 0.25);
         }
+
         /* top accent line */
         .subject-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 3px;
             border-radius: 16px 16px 0 0;
         }
-        .card-orange::before { background: linear-gradient(90deg, #FF5E00, #ff9800); }
-        .card-blue::before   { background: linear-gradient(90deg, #00B2FF, #0066ff); }
-        .card-purple::before { background: linear-gradient(90deg, #c040fb, #7c4dff); }
-        .card-green::before  { background: linear-gradient(90deg, #00e676, #00bcd4); }
+
+        .card-orange::before {
+            background: linear-gradient(90deg, #FF5E00, #ff9800);
+        }
+
+        .card-blue::before {
+            background: linear-gradient(90deg, #00B2FF, #0066ff);
+        }
+
+        .card-purple::before {
+            background: linear-gradient(90deg, #c040fb, #7c4dff);
+        }
+
+        .card-green::before {
+            background: linear-gradient(90deg, #00e676, #00bcd4);
+        }
 
         /* scan sweep inside card */
         .subject-card::after {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
+            top: 0;
+            left: -100%;
             width: 60%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
             animation: card-scan 4s linear infinite;
         }
+
         @keyframes card-scan {
-            0%   { left: -60%; }
-            100% { left: 160%; }
+            0% {
+                left: -60%;
+            }
+
+            100% {
+                left: 160%;
+            }
         }
 
         /* ── Subject icon + name ── */
@@ -89,6 +351,7 @@
             font-size: 2.6rem;
             margin-bottom: 10px;
         }
+
         .subject-code {
             font-family: 'Orbitron', monospace;
             font-size: 0.7rem;
@@ -97,6 +360,7 @@
             opacity: 0.5;
             margin-bottom: 4px;
         }
+
         .subject-name {
             font-family: 'Orbitron', monospace;
             font-size: 1.05rem;
@@ -104,6 +368,7 @@
             color: #fff;
             margin-bottom: 6px;
         }
+
         .subject-deadline-label {
             font-size: 0.85rem;
             opacity: 0.5;
@@ -111,15 +376,28 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+
         .subject-deadline-date {
             font-family: 'Orbitron', monospace;
             font-size: 0.95rem;
             margin-bottom: 22px;
         }
-        .card-orange .subject-deadline-date { color: #FF5E00; }
-        .card-blue   .subject-deadline-date { color: #00B2FF; }
-        .card-purple .subject-deadline-date { color: #c040fb; }
-        .card-green  .subject-deadline-date { color: #00e676; }
+
+        .card-orange .subject-deadline-date {
+            color: #FF5E00;
+        }
+
+        .card-blue .subject-deadline-date {
+            color: #00B2FF;
+        }
+
+        .card-purple .subject-deadline-date {
+            color: #c040fb;
+        }
+
+        .card-green .subject-deadline-date {
+            color: #00e676;
+        }
 
         /* ── Countdown digits ── */
         .countdown-row {
@@ -128,14 +406,16 @@
             gap: 8px;
             margin-bottom: 18px;
         }
+
         .digit-block {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 10px;
             padding: 10px 4px 8px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
         }
+
         .digit-value {
             font-family: 'Orbitron', monospace;
             font-size: 1.8rem;
@@ -143,10 +423,27 @@
             line-height: 1;
             display: block;
         }
-        .card-orange .digit-value { color: #FF5E00; text-shadow: 0 0 18px rgba(255,94,0,0.7); }
-        .card-blue   .digit-value { color: #00B2FF; text-shadow: 0 0 18px rgba(0,178,255,0.7); }
-        .card-purple .digit-value { color: #c040fb; text-shadow: 0 0 18px rgba(192,64,251,0.7); }
-        .card-green  .digit-value { color: #00e676; text-shadow: 0 0 18px rgba(0,230,118,0.7); }
+
+        .card-orange .digit-value {
+            color: #FF5E00;
+            text-shadow: 0 0 18px rgba(255, 94, 0, 0.7);
+        }
+
+        .card-blue .digit-value {
+            color: #00B2FF;
+            text-shadow: 0 0 18px rgba(0, 178, 255, 0.7);
+        }
+
+        .card-purple .digit-value {
+            color: #c040fb;
+            text-shadow: 0 0 18px rgba(192, 64, 251, 0.7);
+        }
+
+        .card-green .digit-value {
+            color: #00e676;
+            text-shadow: 0 0 18px rgba(0, 230, 118, 0.7);
+        }
+
         .digit-label {
             font-size: 0.58rem;
             letter-spacing: 1.5px;
@@ -159,21 +456,38 @@
 
         /* ── Progress bar ── */
         .progress-wrap {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 50px;
             height: 6px;
             overflow: hidden;
             margin-bottom: 10px;
         }
+
         .progress-fill {
             height: 100%;
             border-radius: 50px;
             transition: width 1s linear;
         }
-        .card-orange .progress-fill { background: linear-gradient(90deg, #FF5E00, #ff9800); box-shadow: 0 0 10px #FF5E00; }
-        .card-blue   .progress-fill { background: linear-gradient(90deg, #00B2FF, #0066ff); box-shadow: 0 0 10px #00B2FF; }
-        .card-purple .progress-fill { background: linear-gradient(90deg, #c040fb, #7c4dff); box-shadow: 0 0 10px #c040fb; }
-        .card-green  .progress-fill { background: linear-gradient(90deg, #00e676, #00bcd4); box-shadow: 0 0 10px #00e676; }
+
+        .card-orange .progress-fill {
+            background: linear-gradient(90deg, #FF5E00, #ff9800);
+            box-shadow: 0 0 10px #FF5E00;
+        }
+
+        .card-blue .progress-fill {
+            background: linear-gradient(90deg, #00B2FF, #0066ff);
+            box-shadow: 0 0 10px #00B2FF;
+        }
+
+        .card-purple .progress-fill {
+            background: linear-gradient(90deg, #c040fb, #7c4dff);
+            box-shadow: 0 0 10px #c040fb;
+        }
+
+        .card-green .progress-fill {
+            background: linear-gradient(90deg, #00e676, #00bcd4);
+            box-shadow: 0 0 10px #00e676;
+        }
 
         .progress-text {
             font-size: 0.75rem;
@@ -194,11 +508,43 @@
             text-transform: uppercase;
             margin-top: 14px;
         }
-        .status-ok      { background: rgba(0,230,118,0.15); color: #00e676; border: 1px solid rgba(0,230,118,0.35); }
-        .status-warning { background: rgba(255,152,0,0.15);  color: #ff9800; border: 1px solid rgba(255,152,0,0.35); }
-        .status-urgent  { background: rgba(255,23,68,0.15);  color: #ff1744; border: 1px solid rgba(255,23,68,0.35); animation: badge-pulse 1s infinite; }
-        .status-expired { background: rgba(120,120,120,0.15);color: #888;    border: 1px solid rgba(128,128,128,0.35); }
-        @keyframes badge-pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+
+        .status-ok {
+            background: rgba(0, 230, 118, 0.15);
+            color: #00e676;
+            border: 1px solid rgba(0, 230, 118, 0.35);
+        }
+
+        .status-warning {
+            background: rgba(255, 152, 0, 0.15);
+            color: #ff9800;
+            border: 1px solid rgba(255, 152, 0, 0.35);
+        }
+
+        .status-urgent {
+            background: rgba(255, 23, 68, 0.15);
+            color: #ff1744;
+            border: 1px solid rgba(255, 23, 68, 0.35);
+            animation: badge-pulse 1s infinite;
+        }
+
+        .status-expired {
+            background: rgba(120, 120, 120, 0.15);
+            color: #888;
+            border: 1px solid rgba(128, 128, 128, 0.35);
+        }
+
+        @keyframes badge-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
 
         /* ── Summary bar ── */
         .summary-bar {
@@ -210,14 +556,16 @@
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .summary-chip {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,94,0,0.2);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 94, 0, 0.2);
             border-radius: 10px;
             padding: 14px 24px;
             text-align: center;
             min-width: 120px;
         }
+
         .summary-chip span {
             display: block;
             font-family: 'Orbitron', monospace;
@@ -228,6 +576,7 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .summary-chip p {
             font-size: 0.75rem;
             opacity: 0.5;
@@ -241,10 +590,11 @@
             text-align: center;
             margin-bottom: 40px;
         }
+
         #liveClock {
             font-family: 'Orbitron', monospace;
             font-size: clamp(1rem, 3vw, 1.5rem);
-            color: rgba(255,255,255,0.35);
+            color: rgba(255, 255, 255, 0.35);
             letter-spacing: 3px;
         }
 
@@ -253,6 +603,7 @@
             opacity: 0.3;
             filter: grayscale(1);
         }
+
         .expired-overlay {
             display: none;
             font-family: 'Orbitron', monospace;
@@ -261,16 +612,51 @@
             color: #888;
             margin-top: 10px;
         }
-        .subject-card.expired .expired-overlay { display: block; }
+
+        .subject-card.expired .expired-overlay {
+            display: block;
+        }
 
         /* ── Responsive ── */
         @media (max-width: 480px) {
-            .digit-value { font-size: 1.4rem; }
-            .subject-name { font-size: 0.9rem; }
+            .digit-value {
+                font-size: 1.4rem;
+            }
+
+            .subject-name {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
+
 <body>
+
+    <!-- ══════════════════════════════════════
+         PASSWORD OVERLAY
+    ══════════════════════════════════════ -->
+    <div id="pwOverlay">
+        <!-- background particles inside overlay -->
+        <div class="grid-bg"></div>
+        <div class="gradient-overlay"></div>
+
+        <div class="pw-box">
+            <span class="pw-lock-icon">🔐</span>
+            <div class="pw-title">Access Required</div>
+            <div class="pw-subtitle">Enter password to view HND Deadlines</div>
+
+            <div class="pw-input-wrap">
+                <input type="password" id="pwInput" placeholder="••••••••••••" autocomplete="off" spellcheck="false">
+                <button class="pw-toggle" id="pwToggle" title="Show/hide password">👁️</button>
+            </div>
+
+            <button id="pwBtn">🔓 Unlock</button>
+
+            <div id="pwError"></div>
+            <div class="pw-attempts" id="pwAttempts"></div>
+        </div>
+    </div>
+
     <!-- Background layers (same as main site) -->
     <div class="grid-bg"></div>
     <div class="gradient-overlay"></div>
@@ -289,13 +675,14 @@
                 <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1"/>
-                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1"/>
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
                         </linearGradient>
                     </defs>
-                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
-                    <polygon points="20,8 32,16 32,24 20,32 8,24 8,16" fill="url(#logoGradient)" opacity="0.3"/>
-                    <circle cx="20" cy="20" r="3" fill="url(#logoGradient)"/>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <polygon points="20,8 32,16 32,24 20,32 8,24 8,16" fill="url(#logoGradient)" opacity="0.3" />
+                    <circle cx="20" cy="20" r="3" fill="url(#logoGradient)" />
                 </svg>
                 <span class="logo-text">SAMEERA</span>
             </a>
@@ -344,9 +731,8 @@
     <div class="deadlines-grid" id="deadlinesGrid">
 
         <!-- ═══ CARD 1 ═══ -->
-        <div class="subject-card card-orange" id="card-0"
-             data-deadline="2026-06-07T23:59:00"
-             data-start="2026-03-01T00:00:00">
+        <div class="subject-card card-orange" id="card-0" data-deadline="2026-06-07T23:59:00"
+            data-start="2026-03-01T00:00:00">
             <div class="subject-icon">💻</div>
             <div class="subject-code">Unit 1</div>
             <div class="subject-name">Programming</div>
@@ -379,9 +765,8 @@
         </div>
 
         <!-- ═══ CARD 2 ═══ -->
-        <div class="subject-card card-blue" id="card-1"
-             data-deadline="2026-06-09T23:59:00"
-             data-start="2026-03-01T00:00:00">
+        <div class="subject-card card-blue" id="card-1" data-deadline="2026-06-09T23:59:00"
+            data-start="2026-03-01T00:00:00">
             <div class="subject-icon">🌐</div>
             <div class="subject-code">Unit 2</div>
             <div class="subject-name">Networking</div>
@@ -414,9 +799,8 @@
         </div>
 
         <!-- ═══ CARD 3 ═══ -->
-        <div class="subject-card card-purple" id="card-2"
-             data-deadline="2026-06-13T23:59:00"
-             data-start="2026-03-01T00:00:00">
+        <div class="subject-card card-purple" id="card-2" data-deadline="2026-06-13T23:59:00"
+            data-start="2026-03-01T00:00:00">
             <div class="subject-icon">🗄️</div>
             <div class="subject-code">Unit 3</div>
             <div class="subject-name">Database Design & Development</div>
@@ -449,9 +833,8 @@
         </div>
 
         <!-- ═══ CARD 4 ═══ -->
-        <div class="subject-card card-green" id="card-3"
-             data-deadline="2026-06-11T23:59:00"
-             data-start="2026-03-01T00:00:00">
+        <div class="subject-card card-green" id="card-3" data-deadline="2026-06-11T23:59:00"
+            data-start="2026-03-01T00:00:00">
             <div class="subject-icon">🎓</div>
             <div class="subject-code">Unit 4</div>
             <div class="subject-name">Professional Practice</div>
@@ -495,102 +878,177 @@
     <!-- Back to Top -->
     <a href="#top" class="back-to-top" id="backToTop">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor"/>
+            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor" />
         </svg>
     </a>
 
     <script src="templatemo-electric-scripts.js"></script>
     <script>
-    // ─────────────────────────────────────────────
-    //  Live Clock
-    // ─────────────────────────────────────────────
-    function updateClock() {
-        const now = new Date();
-        const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric',
-                       hour:'2-digit', minute:'2-digit', second:'2-digit' };
-        document.getElementById('liveClock').textContent = now.toLocaleString('en-GB', opts);
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
+        // ─────────────────────────────────────────────
+        //  Live Clock
+        // ─────────────────────────────────────────────
+        function updateClock() {
+            const now = new Date();
+            const opts = {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            };
+            document.getElementById('liveClock').textContent = now.toLocaleString('en-GB', opts);
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
 
-    // ─────────────────────────────────────────────
-    //  Countdown Engine
-    // ─────────────────────────────────────────────
-    const pad = n => String(Math.max(0, n)).padStart(2, '0');
+        // ─────────────────────────────────────────────
+        //  Countdown Engine
+        // ─────────────────────────────────────────────
+        const pad = n => String(Math.max(0, n)).padStart(2, '0');
 
-    function formatDate(d) {
-        return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric',
-                                               hour:'2-digit', minute:'2-digit' });
-    }
+        function formatDate(d) {
+            return d.toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
 
-    function getStatus(days) {
-        if (days < 0)  return ['status-expired', 'EXPIRED'];
-        if (days < 3)  return ['status-urgent',  '🔴 URGENT'];
-        if (days < 7)  return ['status-warning', '🟡 THIS WEEK'];
-        return ['status-ok', '🟢 ON TRACK'];
-    }
+        function getStatus(days) {
+            if (days < 0) return ['status-expired', 'EXPIRED'];
+            if (days < 3) return ['status-urgent', '🔴 URGENT'];
+            if (days < 7) return ['status-warning', '🟡 THIS WEEK'];
+            return ['status-ok', '🟢 ON TRACK'];
+        }
 
-    function tick() {
-        const now = Date.now();
-        let pending = 0, urgent = 0, minDays = Infinity;
+        function tick() {
+            const now = Date.now();
+            let pending = 0, urgent = 0, minDays = Infinity;
 
-        document.querySelectorAll('.subject-card').forEach((card, i) => {
-            const deadline  = new Date(card.dataset.deadline).getTime();
-            const startTime = new Date(card.dataset.start).getTime();
-            const diff      = deadline - now;
+            document.querySelectorAll('.subject-card').forEach((card, i) => {
+                const deadline = new Date(card.dataset.deadline).getTime();
+                const startTime = new Date(card.dataset.start).getTime();
+                const diff = deadline - now;
 
-            // Always update the display date
-            document.getElementById('date-' + i).textContent =
-                formatDate(new Date(card.dataset.deadline));
+                // Always update the display date
+                document.getElementById('date-' + i).textContent =
+                    formatDate(new Date(card.dataset.deadline));
 
-            if (diff <= 0) {
-                // Expired
-                card.classList.add('expired');
-                ['days','hours','mins','secs'].forEach(u =>
-                    document.getElementById(`d-${u}-${i}`).textContent = '00');
-                document.getElementById(`prog-${i}`).style.width = '100%';
-                document.getElementById(`prog-text-${i}`).textContent = '100% elapsed';
+                if (diff <= 0) {
+                    // Expired
+                    card.classList.add('expired');
+                    ['days', 'hours', 'mins', 'secs'].forEach(u =>
+                        document.getElementById(`d-${u}-${i}`).textContent = '00');
+                    document.getElementById(`prog-${i}`).style.width = '100%';
+                    document.getElementById(`prog-text-${i}`).textContent = '100% elapsed';
+                    const b = document.getElementById(`badge-${i}`);
+                    b.className = 'status-badge status-expired';
+                    b.textContent = 'EXPIRED';
+                    return;
+                }
+
+                pending++;
+                const totalMs = deadline - startTime;
+                const elapsed = now - startTime;
+                const pct = Math.min(100, Math.max(0, (elapsed / totalMs) * 100));
+
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor((diff % 86400000) / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+
+                document.getElementById(`d-days-${i}`).textContent = pad(days);
+                document.getElementById(`d-hours-${i}`).textContent = pad(hours);
+                document.getElementById(`d-mins-${i}`).textContent = pad(mins);
+                document.getElementById(`d-secs-${i}`).textContent = pad(secs);
+
+                document.getElementById(`prog-${i}`).style.width = pct.toFixed(1) + '%';
+                document.getElementById(`prog-text-${i}`).textContent =
+                    pct.toFixed(1) + '% of time elapsed';
+
+                const [cls, label] = getStatus(days);
                 const b = document.getElementById(`badge-${i}`);
-                b.className = 'status-badge status-expired';
-                b.textContent = 'EXPIRED';
+                b.className = 'status-badge ' + cls;
+                b.textContent = label;
+
+                if (days < 3) urgent++;
+                if (days < minDays) minDays = days;
+            });
+
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('urgentCount').textContent = urgent;
+            document.getElementById('nextDeadline').textContent = minDays === Infinity ? '–' : minDays;
+        }
+
+        tick();
+        setInterval(tick, 1000);
+
+        // ─────────────────────────────────────────────
+        //  PASSWORD GATE
+        // ─────────────────────────────────────────────
+        (function () {
+            const CORRECT_PASSWORD = 'dragon@#Ab'; // ← Change your password here
+            const SESSION_KEY = 'hnd_unlocked';
+            const MAX_ATTEMPTS = 5;
+
+            const overlay = document.getElementById('pwOverlay');
+            const input = document.getElementById('pwInput');
+            const btn = document.getElementById('pwBtn');
+            const errEl = document.getElementById('pwError');
+            const attEl = document.getElementById('pwAttempts');
+            const toggleBtn = document.getElementById('pwToggle');
+            const box = document.querySelector('.pw-box');
+
+            let attempts = 0;
+
+            // Already unlocked this session?
+            if (sessionStorage.getItem(SESSION_KEY) === '1') {
+                overlay.classList.add('hidden');
                 return;
             }
 
-            pending++;
-            const totalMs = deadline - startTime;
-            const elapsed = now - startTime;
-            const pct     = Math.min(100, Math.max(0, (elapsed / totalMs) * 100));
+            // Show overlay
+            overlay.classList.remove('hidden');
+            setTimeout(() => input.focus(), 400);
 
-            const days    = Math.floor(diff / 86400000);
-            const hours   = Math.floor((diff % 86400000) / 3600000);
-            const mins    = Math.floor((diff % 3600000)  / 60000);
-            const secs    = Math.floor((diff % 60000)    / 1000);
+            // Show/hide password toggle
+            toggleBtn.addEventListener('click', () => {
+                const isHidden = input.type === 'password';
+                input.type = isHidden ? 'text' : 'password';
+                toggleBtn.textContent = isHidden ? '🙈' : '👁️';
+            });
 
-            document.getElementById(`d-days-${i}`).textContent  = pad(days);
-            document.getElementById(`d-hours-${i}`).textContent = pad(hours);
-            document.getElementById(`d-mins-${i}`).textContent  = pad(mins);
-            document.getElementById(`d-secs-${i}`).textContent  = pad(secs);
+            function attempt() {
+                const val = input.value.trim();
+                if (!val) return;
 
-            document.getElementById(`prog-${i}`).style.width = pct.toFixed(1) + '%';
-            document.getElementById(`prog-text-${i}`).textContent =
-                pct.toFixed(1) + '% of time elapsed';
+                if (val === CORRECT_PASSWORD) {
+                    sessionStorage.setItem(SESSION_KEY, '1');
+                    errEl.classList.remove('show');
+                    box.classList.add('unlocking');
+                    setTimeout(() => overlay.classList.add('hidden'), 500);
+                } else {
+                    attempts++;
+                    input.value = '';
+                    input.classList.add('error');
+                    setTimeout(() => input.classList.remove('error'), 600);
 
-            const [cls, label] = getStatus(days);
-            const b = document.getElementById(`badge-${i}`);
-            b.className = 'status-badge ' + cls;
-            b.textContent = label;
+                    const left = MAX_ATTEMPTS - attempts;
+                    if (left <= 0) {
+                        errEl.textContent = '🔒 Too many attempts. Please reload.';
+                        errEl.classList.add('show');
+                        btn.disabled = true;
+                        input.disabled = true;
+                    } else {
+                        errEl.textContent = '❌ Wrong password!';
+                        errEl.classList.add('show');
+                        attEl.textContent = `${left} attempt${left === 1 ? '' : 's'} remaining`;
+                        setTimeout(() => errEl.classList.remove('show'), 2500);
+                    }
+                    input.focus();
+                }
+            }
 
-            if (days < 3) urgent++;
-            if (days < minDays) minDays = days;
-        });
-
-        document.getElementById('pendingCount').textContent  = pending;
-        document.getElementById('urgentCount').textContent   = urgent;
-        document.getElementById('nextDeadline').textContent  = minDays === Infinity ? '–' : minDays;
-    }
-
-    tick();
-    setInterval(tick, 1000);
+            btn.addEventListener('click', attempt);
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') attempt(); });
+        })();
     </script>
 </body>
+
 </html>
