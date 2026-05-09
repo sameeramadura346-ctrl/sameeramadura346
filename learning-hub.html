@@ -8,19 +8,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
         rel="stylesheet">
-    <link href="sameera-style.css" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QH6Z3VRWB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-6QH6Z3VRWB');
-    </script>
+    <link href="templatemo-electric-xtra.css" rel="stylesheet">
 </head>
 
-<body id="top">
+<body>
     <!-- Animated Grid Background -->
     <div class="grid-bg"></div>
     <div class="gradient-overlay"></div>
@@ -49,26 +40,17 @@
                     </defs>
                     <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
                         stroke-width="2" />
-                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
-                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                    <polygon points="20,8 32,16 32,24 20,32 8,24 8,16" fill="url(#logoGradient)" opacity="0.3" />
+                    <circle cx="20" cy="20" r="3" fill="url(#logoGradient)" />
                 </svg>
                 <span class="logo-text">SAMEERA</span>
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html#home" class="nav-link">Home</a></li>
                 <li><a href="prompt-hub.html" class="nav-link">Prompt Hub</a></li>
-                <li><a href="live-cricket.html" class="nav-link">Cricket WorldCup</a></li>
-                <li><a href="our-tools.html" class="nav-link">Our Tools</a></li>
-                <li><a href="about-us.html" class="nav-link">About Us</a></li>
+                <li><a href="learning-hub.html" class="nav-link active">Learning hub</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
-            <button class="music-toggle" id="musicToggle" title="Play Music">
-                <svg class="play-icon" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                </svg>
-                <svg class="stop-icon" viewBox="0 0 24 24">
-                    <path d="M6 6h12v12H6z" />
-                </svg>
-            </button>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
@@ -79,193 +61,182 @@
 
     <!-- Main Content -->
     <main style="padding-top: 100px; min-height: 100vh;">
-        <section class="learning-showcase">
-            <div class="content-wrapper">
-                <h1 class="page-main-title">Career Opportunities in IT</h1>
+        <section class="features">
+            <h2 class="section-title">LEARNING HUB</h2>
+            <p class="section-subtitle">Expand your knowledge with our curated learning resources.</p>
 
-                <div class="course-grid">
-                    <!-- Card 1 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/full_stack.png" alt="Full Stack Developer">
-                        </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Full Stack Developer</h3>
-                        </div>
-                    </a>
+            <div class="features-container">
+                <div class="feature-tabs">
+                    <div class="tab-item active" data-tab="courses">
+                        <span class="tab-icon">💻</span>
+                        <span>Free Courses</span>
+                    </div>
+                    <div class="tab-item" data-tab="youtube">
+                        <span class="tab-icon">📺</span>
+                        <span>YouTube Channels</span>
+                    </div>
+                    <div class="tab-item" data-tab="books">
+                        <span class="tab-icon">📚</span>
+                        <span>E-Books & Tools</span>
+                    </div>
+                </div>
 
-                    <!-- Card 2 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/python.png" alt="Python Programmer">
+                <div class="feature-content">
+                    <!-- Free Courses Panel -->
+                    <div class="content-panel active" id="courses">
+                        <div class="cards-grid">
+                            <a href="https://www.freecodecamp.org/" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    💻</div>
+                                <h3 class="card-title">FreeCodeCamp</h3>
+                                <p class="card-subtitle">Learn to code for free. Build projects. Earn certifications.
+                                </p>
+                                <span class="pricing-tag">Fully Free</span>
+                            </a>
+                            <a href="https://www.coursera.org/" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    🎓</div>
+                                <h3 class="card-title">Coursera</h3>
+                                <p class="card-subtitle">Courses from top universities. Many audio/video materials are
+                                    free.</p>
+                                <span class="pricing-tag">Free Audit</span>
+                            </a>
+                            <a href="https://www.edx.org/" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    🏛️</div>
+                                <h3 class="card-title">edX</h3>
+                                <p class="card-subtitle">Access 2000+ free online courses from leading institutions.</p>
+                                <span class="pricing-tag">Free Audit</span>
+                            </a>
+                            <a href="https://www.kaggle.com/learn" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    📊</div>
+                                <h3 class="card-title">Kaggle Learn</h3>
+                                <p class="card-subtitle">Practical Data Science & ML courses. Hands-on and fast.</p>
+                                <span class="pricing-tag">Fully Free</span>
+                            </a>
+                            <a href="https://cs50.harvard.edu/x/" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    🔬</div>
+                                <h3 class="card-title">CS50</h3>
+                                <p class="card-subtitle">Harvard's Introduction to Computer Science. World-class
+                                    material.</p>
+                                <span class="pricing-tag">Fully Free</span>
+                            </a>
+                            <a href="https://www.udacity.com/courses/all" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    �</div>
+                                <h3 class="card-title">Udacity</h3>
+                                <p class="card-subtitle">Tech skill courses. Some introductory courses are free.</p>
+                                <span class="pricing-tag">Free & Paid</span>
+                            </a>
                         </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Python Programmer</h3>
-                        </div>
-                    </a>
+                    </div>
 
-                    <!-- Card 3 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/web_dev.png" alt="Web Developer">
+                    <!-- YouTube Channels Panel -->
+                    <div class="content-panel" id="youtube">
+                        <div class="cards-grid">
+                            <a href="https://www.youtube.com/@TraversyMedia" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    🔥</div>
+                                <h3 class="card-title">Traversy Media</h3>
+                                <p class="card-subtitle">One of the best resources for web development tutorials.</p>
+                                <span class="pricing-tag">YouTube</span>
+                            </a>
+                            <a href="https://www.youtube.com/@Fireship" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    ⚡</div>
+                                <h3 class="card-title">Fireship</h3>
+                                <p class="card-subtitle">High-intensity code tutorials & tech news. Fast and efficient.
+                                </p>
+                                <span class="pricing-tag">YouTube</span>
+                            </a>
+                            <a href="https://www.youtube.com/@freecodecamp" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    📹</div>
+                                <h3 class="card-title">FreeCodeCamp</h3>
+                                <p class="card-subtitle">Full-length courses on Python, Java, Web Dev, often hours long.
+                                </p>
+                                <span class="pricing-tag">YouTube</span>
+                            </a>
+                            <a href="https://www.youtube.com/@NetworkChuck" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    ☕</div>
+                                <h3 class="card-title">NetworkChuck</h3>
+                                <p class="card-subtitle">IT, Networking & Hacking made simple and energetic.</p>
+                                <span class="pricing-tag">YouTube</span>
+                            </a>
+                            <a href="https://www.youtube.com/@WebDevSimplified" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    🌐</div>
+                                <h3 class="card-title">Web Dev Simplified</h3>
+                                <p class="card-subtitle">Deep dives into CSS, React, and modern web concepts.</p>
+                                <span class="pricing-tag">YouTube</span>
+                            </a>
+                            <a href="https://www.youtube.com/@BroCodez" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    😎</div>
+                                <h3 class="card-title">Bro Code</h3>
+                                <p class="card-subtitle">Coding tutorials in a clear, easy-to-understand format.</p>
+                                <span class="pricing-tag">YouTube</span>
+                            </a>
                         </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Web Developer</h3>
-                        </div>
-                    </a>
+                    </div>
 
-                    <!-- Card 4 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/data_science.png" alt="Data Scientist">
+                    <!-- E-Books & Tools Panel -->
+                    <div class="content-panel" id="books">
+                        <div class="cards-grid">
+                            <a href="https://github.com/EbookFoundation/free-programming-books" class="tool-card"
+                                target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    📚</div>
+                                <h3 class="card-title">Free Programming Books</h3>
+                                <p class="card-subtitle">Massive GitHub list of free coding books in many languages.</p>
+                                <span class="pricing-tag">Open Source</span>
+                            </a>
+                            <a href="https://roadmap.sh/" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    🗺️</div>
+                                <h3 class="card-title">Developer Roadmaps</h3>
+                                <p class="card-subtitle">Visual guides to help you choose a learning path.</p>
+                                <span class="pricing-tag">Tool</span>
+                            </a>
+                            <a href="https://devdocs.io/" class="tool-card" target="_blank">
+                                <div class="card-logo"
+                                    style="font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+                                    📖</div>
+                                <h3 class="card-title">DevDocs</h3>
+                                <p class="card-subtitle">Fast, offline, and instant documentation browser.</p>
+                                <span class="pricing-tag">Tool</span>
+                            </a>
                         </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Data Scientist</h3>
-                        </div>
-                    </a>
+                    </div>
 
-                    <!-- Card 5 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/software_tester.png" alt="Software Tester">
-                        </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Software Tester</h3>
-                        </div>
-                    </a>
-
-                    <!-- Card 6 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/test_automation.png" alt="Software Test Automation Engineer">
-                        </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Software Test Automation Engineer</h3>
-                        </div>
-                    </a>
-
-                    <!-- Card 7 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/devops.png" alt="DevOps Professional">
-                        </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">DevOps Professional</h3>
-                        </div>
-                    </a>
-
-                    <!-- Card 8 -->
-                    <a href="https://example.com" class="course-card" target="_blank">
-                        <div class="card-image-box">
-                            <img src="images/mobile_dev.png" alt="Mobile Developer">
-                        </div>
-                        <div class="card-footer">
-                            <h3 class="course-name">Mobile Developer</h3>
-                        </div>
-                    </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <style>
-        .learning-showcase {
-            padding: 30px 20px 60px 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .content-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .recommend-label {
-            color: #4285F4;
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .page-main-title {
-            color: #ffffff;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 50px;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .course-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(66, 133, 244, 0.4);
-        }
-
-        .card-image-box {
-            padding: 25px;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            aspect-ratio: 4/3;
-        }
-
-        .card-image-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .card-footer {
-            padding: 20px;
-            text-align: center;
-            background: white;
-            border-top: 1px solid #eee;
-        }
-
-        .course-name {
-            color: #333;
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 0;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        @media (max-width: 768px) {
-            .page-main-title {
-                font-size: 2rem;
-            }
-
-            .course-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
                 <a href="#careers">Careers</a>
             </div>
             <p class="copyright">© 2025 sameera official. All rights reserved.</p>
@@ -279,7 +250,7 @@
         </svg>
     </a>
 
-    <script src="sameera-scripts.js"></script>
+    <script src="templatemo-electric-scripts.js"></script>
 </body>
 
 </html>

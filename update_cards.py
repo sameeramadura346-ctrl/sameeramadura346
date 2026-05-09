@@ -1,7 +1,7 @@
 import re
 
 # Read the original HTML file
-with open('index.html', 'r', encoding='utf-8') as f:
+with open(r'c:\Users\Sameera\Downloads\New folder\templatemo_596_electric_xtra\index.html', 'r', encoding='utf-8') as f:
     content = f.read()
 
 # Define replacement pattern for card structure
@@ -67,7 +67,7 @@ for replacement in replacements:
     content = re.sub(pattern, new_card, content, flags=re.DOTALL, count=1)
 
 # Write back
-with open('index.html', 'w', encoding='utf-8') as f:
+with open(r'c:\Users\Sameera\Downloads\New folder\templatemo_596_electric_xtra\index.html', 'w', encoding='utf-8') as f:
     f.write(content)
 
 print("Updated Performance panel cards successfully!")
