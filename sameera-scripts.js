@@ -311,10 +311,271 @@ function handleInteraction() {
 }
 
 function removeInteractionListeners() {
-    ['click', 'keydown', 'scroll', 'mousemove', 'touchstart', 'mousedown'].forEach(evt => {
+            ['click', 'keydown', 'scroll', 'mousemove', 'touchstart', 'mousedown'].forEach(evt => {
         window.removeEventListener(evt, handleInteraction);
     });
 }
+
+// ══════════════════════════════════════════════════════════
+//  Assignment Data — extracted from actual assignment briefs
+// ══════════════════════════════════════════════════════════
+var ASSIGNMENT_DATA = null;
+
+// Activity Modal Logic
+function initActivityModal() {
+  const modal = document.getElementById('activityModal');
+  if (!modal) return;
+  const backdrop   = modal.querySelector('.act-backdrop');
+  const closeBtn   = document.getElementById('closeModal');
+  const activityList = document.getElementById('activityList');
+  const tmpl       = document.getElementById('activityTemplate');
+
+  function refreshModalActBar(cardId, progress, allSubProg) {
+    const data = ASSIGNMENT_DATA[cardId] || { activities: [] };
+    let totalSubQs = 0;
+    let completedSubQs = 0;
+
+    data.activities.forEach(function(actInfo, i) {
+      const subqsCount = actInfo.subqs ? actInfo.subqs.length : 0;
+      totalSubQs += subqsCount;
+      const subProg = allSubProg[i] || [];
+      for (let qi = 0; qi < subqsCount; qi++) {
+        if (subProg[qi]) {
+          completedSubQs++;
+        }
+      }
+    });
+
+    const pct = totalSubQs > 0 ? (completedSubQs / totalSubQs) * 100 : (progress.filter(Boolean).length / 4) * 100;
+    document.getElementById('modalActPct').textContent = Math.round(pct) + '% done';
+    document.getElementById('modalActBar').style.width = pct.toFixed(1) + '%';
+  }
+
+  function openModal(card) {
+    const cardId = card.id;
+
+    // ── Header info ──────────────────────────────────
+    const iconEl = card.querySelector('.subject-icon');
+    const unitEl = card.querySelector('.subject-code');
+    const nameEl = card.querySelector('.subject-name');
+    document.getElementById('modalIcon').textContent  = iconEl ? iconEl.textContent : '📋';
+    document.getElementById('modalUnit').textContent  = unitEl ? unitEl.textContent : '';
+    document.getElementById('modalTitle').textContent = (nameEl ? nameEl.textContent : 'Assignment') + ' — Activities';
+
+    // ── Deadline & time elapsed % ─────────────────────
+    const deadline = new Date(card.dataset.deadline);
+    const start    = new Date(card.dataset.start);
+    const now      = Date.now();
+    const totalMs  = deadline.getTime() - start.getTime();
+    const elapsed  = now - start.getTime();
+    const timePct  = Math.min(100, Math.max(0, (elapsed / totalMs) * 100));
+    const daysLeft = Math.max(0, Math.floor((deadline.getTime() - now) / 86400000));
+    const dlStr    = deadline.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    document.getElementById('modalDeadline').textContent = dlStr + ' (' + daysLeft + ' days left)';
+    document.getElementById('modalTimePct').textContent  = timePct.toFixed(1) + '% of time used';
+    document.getElementById('modalTimeBar').style.width  = timePct.toFixed(1) + '%';
+
+    // ── Activity & sub-question progress ─────────────
+    const progressKey    = 'progress_'    + cardId;
+    const subProgressKey = 'subprogress_' + cardId;
+    const progress    = JSON.parse(localStorage.getItem(progressKey))    || [false, false, false, false];
+    const allSubProg  = JSON.parse(localStorage.getItem(subProgressKey)) || [];
+
+    refreshModalActBar(cardId, progress, allSubProg);
+
+    // ── Build activity rows ───────────────────────────
+    activityList.innerHTML = '';
+    const data = ASSIGNMENT_DATA[cardId] || { activities: [] };
+
+    progress.forEach(function(done, i) {
+      const actInfo   = data.activities[i] || { title: 'Activity ' + (i + 1), subqs: [] };
+      const subProg   = allSubProg[i] || actInfo.subqs.map(function() { return false; });
+
+      const clone     = tmpl.content.cloneNode(true);
+      const row       = clone.querySelector('.act-row');
+      row.querySelector('.activity-title').textContent = actInfo.title;
+
+      const checkbox  = row.querySelector('.activity-checkbox');
+      checkbox.checked = done;
+      if (done) row.classList.add('act-done');
+
+      // ── Activity-level checkbox handler ───────────
+      checkbox.addEventListener('change', function() {
+        progress[i] = checkbox.checked;
+        row.classList.toggle('act-done', checkbox.checked);
+
+        // Update all sub-questions to match the checked state of the activity
+        subProg.fill(checkbox.checked);
+        row.querySelectorAll('.subq-checkbox').forEach(function(cb) {
+          cb.checked = checkbox.checked;
+          cb.closest('li').classList.toggle('subq-done', checkbox.checked);
+        });
+        saveSubProgress();
+
+        localStorage.setItem(progressKey, JSON.stringify(progress));
+        refreshModalActBar(cardId, progress, allSubProg);
+        updateCardProgress(cardId);
+      });
+
+      // ── Sub-question list ─────────────────────────
+      const toggle = row.querySelector('.subq-toggle');
+      const subq   = row.querySelector('.subq-text');
+
+      function saveSubProgress() {
+        while (allSubProg.length <= i) allSubProg.push([]);
+        allSubProg[i] = subProg.slice();
+        localStorage.setItem(subProgressKey, JSON.stringify(allSubProg));
+      }
+
+      if (actInfo.subqs && actInfo.subqs.length > 0) {
+        var ul = document.createElement('ul');
+        ul.className = 'subq-list';
+
+        actInfo.subqs.forEach(function(q, qi) {
+          var li  = document.createElement('li');
+          if (subProg[qi]) li.classList.add('subq-done');
+
+          var lbl = document.createElement('label');
+          lbl.className = 'subq-item-label';
+
+          var cb  = document.createElement('input');
+          cb.type      = 'checkbox';
+          cb.className = 'subq-checkbox';
+          cb.checked   = !!subProg[qi];
+
+          var mark = document.createElement('span');
+          mark.className = 'subq-checkmark';
+
+          var txt = document.createElement('span');
+          txt.className = 'subq-item-text';
+          txt.textContent = q;
+
+          lbl.appendChild(cb);
+          lbl.appendChild(mark);
+          lbl.appendChild(txt);
+          li.appendChild(lbl);
+          ul.appendChild(li);
+
+          // Sub-question checkbox handler
+          cb.addEventListener('change', function() {
+            subProg[qi] = cb.checked;
+            li.classList.toggle('subq-done', cb.checked);
+            saveSubProgress();
+
+            // If ALL sub-questions done → auto-tick activity
+            var allDone = subProg.slice(0, actInfo.subqs.length).every(Boolean);
+            if (allDone && !checkbox.checked) {
+              checkbox.checked = true;
+              progress[i] = true;
+              row.classList.add('act-done');
+              localStorage.setItem(progressKey, JSON.stringify(progress));
+            }
+            // If one sub-question unticked → auto-untick activity
+            else if (!cb.checked && checkbox.checked) {
+              checkbox.checked = false;
+              progress[i] = false;
+              row.classList.remove('act-done');
+              localStorage.setItem(progressKey, JSON.stringify(progress));
+            }
+            
+            // Always refresh modal progress and card progress
+            refreshModalActBar(cardId, progress, allSubProg);
+            updateCardProgress(cardId);
+          });
+        });
+
+        subq.innerHTML = '';
+        subq.appendChild(ul);
+      }
+
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = !subq.classList.contains('hidden');
+        subq.classList.toggle('hidden', isOpen);
+        toggle.textContent = isOpen ? '▼ Details' : '▲ Hide';
+      });
+
+      activityList.appendChild(clone);
+    });
+
+    modal.classList.remove('hidden');
+    modal.classList.add('visible');
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('visible');
+  }
+
+  document.querySelectorAll('.subject-card').forEach(function(card) {
+    card.addEventListener('click', function() { openModal(card); });
+  });
+
+  backdrop.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
+  });
+}
+
+function updateCardProgress(cardId) {
+  const progressKey = 'progress_' + cardId;
+  const subProgressKey = 'subprogress_' + cardId;
+  const progress = JSON.parse(localStorage.getItem(progressKey)) || [false, false, false, false];
+  const allSubProg = JSON.parse(localStorage.getItem(subProgressKey)) || [];
+
+  const data = ASSIGNMENT_DATA[cardId] || { activities: [] };
+  let totalSubQs = 0;
+  let completedSubQs = 0;
+
+  data.activities.forEach(function(actInfo, i) {
+    const subqsCount = actInfo.subqs ? actInfo.subqs.length : 0;
+    totalSubQs += subqsCount;
+    const subProg = allSubProg[i] || [];
+    for (let qi = 0; qi < subqsCount; qi++) {
+      if (subProg[qi]) {
+        completedSubQs++;
+      }
+    }
+  });
+
+  const pct = totalSubQs > 0 ? (completedSubQs / totalSubQs) * 100 : (progress.filter(Boolean).length / 4) * 100;
+  const completed = progress.filter(Boolean).length;
+  const idx = parseInt(cardId.split('-')[1]);
+
+  // ── Linear bar ──────────────────────────────────────
+  const progBar  = document.getElementById('prog-' + idx);
+  const progText = document.getElementById('prog-text-' + idx);
+  if (progBar)  progBar.style.width = pct.toFixed(1) + '%';
+  if (progText) progText.textContent = completed + ' / 4 activities completed';
+
+  // ── Circular SVG ring ─────────────────────────────
+  const circumference = 2 * Math.PI * 32; // 201.06
+  const offset = circumference * (1 - pct / 100);
+  const circRing = document.getElementById('circ-' + idx);
+  const circText = document.getElementById('circ-text-' + idx);
+  if (circRing) circRing.style.strokeDashoffset = offset.toFixed(2);
+  if (circText) circText.textContent = Math.round(pct) + '%';
+
+  // ── Status badge ──────────────────────────────────
+  const badge = document.getElementById('badge-' + idx);
+  if (badge) {
+    badge.textContent = completed === 4 ? '✅ All Done' : completed + ' / 4 done';
+    badge.className   = 'status-badge ' + (completed === 4 ? 'status-ok' : 'status-warning');
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  if (ASSIGNMENT_DATA) {
+    initActivityModal();
+    if (document.getElementById('activityModal')) {
+      document.querySelectorAll('.subject-card').forEach(function(card) {
+        updateCardProgress(card.id);
+      });
+    }
+  }
+});
 
 // Global initialization and Back-Forward Cache support
 window.addEventListener('pageshow', (event) => {

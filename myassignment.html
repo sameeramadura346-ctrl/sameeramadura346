@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HND Assignment Tracker - Sameera Official</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="sameera-style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QH6Z3VRWB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-6QH6Z3VRWB');
+    </script>
+    <style>
+        /* ── Page Header ── */
+        .deadlines-hero {
+            padding: 120px 20px 60px;
+            text-align: center;
+        }
+
+        .deadlines-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .deadlines-hero p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            margin-top: 12px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* ── Grid ── */
+        .deadlines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        /* ── Subject Card ── */
+        .subject-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.25);
+            border-radius: 16px;
+            padding: 32px 24px;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(255, 94, 0, 0.25);
+        }
+
+        /* top accent line */
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .card-orange::before {
+            background: linear-gradient(90deg, #FF5E00, #ff9800);
+        }
+
+        .card-blue::before {
+            background: linear-gradient(90deg, #00B2FF, #0066ff);
+        }
+
+        .card-purple::before {
+            background: linear-gradient(90deg, #c040fb, #7c4dff);
+        }
+
+        .card-green::before {
+            background: linear-gradient(90deg, #00e676, #00bcd4);
+        }
+
+        /* scan sweep inside card */
+        .subject-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            animation: card-scan 4s linear infinite;
+        }
+
+        @keyframes card-scan {
+            0% {
+                left: -60%;
+            }
+
+            100% {
+                left: 160%;
+            }
+        }
+
+        /* ── Subject icon + name ── */
+        .subject-icon {
+            font-size: 2.6rem;
+            margin-bottom: 10px;
+        }
+
+        .subject-code {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 4px;
+        }
+
+        .subject-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .subject-deadline-label {
+            font-size: 0.85rem;
+            opacity: 0.5;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .subject-deadline-date {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 22px;
+        }
+
+        .card-orange .subject-deadline-date {
+            color: #FF5E00;
+        }
+
+        .card-blue .subject-deadline-date {
+            color: #00B2FF;
+        }
+
+        .card-purple .subject-deadline-date {
+            color: #c040fb;
+        }
+
+        .card-green .subject-deadline-date {
+            color: #00e676;
+        }
+
+        /* ── Countdown digits ── */
+        .countdown-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .digit-block {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 10px 4px 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+        }
+
+        .digit-value {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+            display: block;
+        }
+
+        .card-orange .digit-value {
+            color: #FF5E00;
+            text-shadow: 0 0 18px rgba(255, 94, 0, 0.7);
+        }
+
+        .card-blue .digit-value {
+            color: #00B2FF;
+            text-shadow: 0 0 18px rgba(0, 178, 255, 0.7);
+        }
+
+        .card-purple .digit-value {
+            color: #c040fb;
+            text-shadow: 0 0 18px rgba(192, 64, 251, 0.7);
+        }
+
+        .card-green .digit-value {
+            color: #00e676;
+            text-shadow: 0 0 18px rgba(0, 230, 118, 0.7);
+        }
+
+        .digit-label {
+            font-size: 0.58rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.45;
+            font-family: 'Rajdhani', sans-serif;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* ── Progress bar ── */
+        .progress-wrap {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50px;
+            height: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 50px;
+            transition: width 1s linear;
+        }
+
+        .card-orange .progress-fill {
+            background: linear-gradient(90deg, #FF5E00, #ff9800);
+            box-shadow: 0 0 10px #FF5E00;
+        }
+
+        .card-blue .progress-fill {
+            background: linear-gradient(90deg, #00B2FF, #0066ff);
+            box-shadow: 0 0 10px #00B2FF;
+        }
+
+        .card-purple .progress-fill {
+            background: linear-gradient(90deg, #c040fb, #7c4dff);
+            box-shadow: 0 0 10px #c040fb;
+        }
+
+        .card-green .progress-fill {
+            background: linear-gradient(90deg, #00e676, #00bcd4);
+            box-shadow: 0 0 10px #00e676;
+        }
+
+        .progress-text {
+            font-size: 0.75rem;
+            opacity: 0.45;
+            font-family: 'Rajdhani', sans-serif;
+            text-align: right;
+        }
+
+        /* ── Status badge ── */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 14px;
+        }
+
+        .status-ok {
+            background: rgba(0, 230, 118, 0.15);
+            color: #00e676;
+            border: 1px solid rgba(0, 230, 118, 0.35);
+        }
+
+        .status-warning {
+            background: rgba(255, 152, 0, 0.15);
+            color: #ff9800;
+            border: 1px solid rgba(255, 152, 0, 0.35);
+        }
+
+        .status-urgent {
+            background: rgba(255, 23, 68, 0.15);
+            color: #ff1744;
+            border: 1px solid rgba(255, 23, 68, 0.35);
+            animation: badge-pulse 1s infinite;
+        }
+
+        .status-expired {
+            background: rgba(120, 120, 120, 0.15);
+            color: #888;
+            border: 1px solid rgba(128, 128, 128, 0.35);
+        }
+
+        @keyframes badge-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ── Summary bar ── */
+        .summary-bar {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .summary-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 94, 0, 0.2);
+            border-radius: 10px;
+            padding: 14px 24px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .summary-chip span {
+            display: block;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #FF5E00, #00B2FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .summary-chip p {
+            font-size: 0.75rem;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ── Live clock ── */
+        .live-clock-wrap {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #liveClock {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 3px;
+        }
+
+        /* ── Expired state ── */
+        .subject-card.expired .countdown-row {
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        .expired-overlay {
+            display: none;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            text-align: center;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .subject-card.expired .expired-overlay {
+            display: block;
+        }
+
+        /* ── Password Overlay ── */
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Rajdhani', sans-serif;
+            transition: opacity 0.5s ease;
+        }
+
+        .password-overlay.hidden {
+            display: none !important;
+        }
+
+        .password-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 94, 0, 0.25);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lock-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .password-box h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .password-box p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 24px;
+        }
+
+        .password-box input[type="password"] {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 1.1rem;
+            font-family: 'Rajdhani', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .password-box input[type="password"]:focus {
+            border-color: #FF5E00;
+        }
+
+        .password-box button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(45deg, #FF5E00, #ff9800);
+            color: #fff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .password-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 94, 0, 0.4);
+        }
+
+        .password-error {
+            color: #ff1744;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .password-error.hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Password Protection Overlay -->
+    <div id="passwordOverlay" class="password-overlay">
+        <div class="password-box">
+            <div class="lock-icon">🔒</div>
+            <h2>Restricted Access</h2>
+            <p>Please enter the password to view your assignment tracker.</p>
+            <input type="password" id="pagePassword" placeholder="Enter password..." />
+            <button id="submitPasswordBtn">Unlock Page</button>
+            <div id="passwordError" class="password-error hidden">❌ Incorrect password. Try again.</div>
+        </div>
+    </div>
+
+
+    <!-- Background layers (same as main site) -->
+    <div class="grid-bg"></div>
+    <div class="gradient-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="shapes-container">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-triangle"></div>
+        <div class="shape shape-square"></div>
+    </div>
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF5E00;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B2FF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="20,2 38,14 38,26 20,38 2,26 2,14" fill="none" stroke="url(#logoGradient)"
+                        stroke-width="2" />
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" fill="url(#logoGradient)"
+                        font-family="Orbitron, sans-serif" font-weight="900" font-size="18">S</text>
+                </svg>
+                <span class="logo-text">SAMEERA</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="prompt-hub.html" class="nav-link">Prompt Hub</a></li>
+                <li><a href="live-cricket.html" class="nav-link">Watch IPL</a></li>
+                <li><a href="our-tools.html" class="nav-link">Our Tools</a></li>
+                <li><a href="about-us.html" class="nav-link">About Us</a></li>
+                <li><a href="hnd-deadlines.html" class="nav-link">HND Deadlines</a></li>
+                <li><a href="myassignment.html" class="nav-link active">My Assignment</a></li>
+            </ul>
+            <button class="music-toggle" id="musicToggle" title="Play Music">
+                <svg class="play-icon" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg class="stop-icon" viewBox="0 0 24 24">
+                    <path d="M6 6h12v12H6z" />
+                </svg>
+            </button>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="deadlines-hero">
+        <h1>HND Assignment Tracker</h1>
+        <p>Track your activities, check off sub-questions, and view completion status 🔥</p>
+        <div class="live-clock-wrap">
+            <div id="liveClock">Loading…</div>
+        </div>
+    </div>
+
+    <!-- Summary chips -->
+    <div class="summary-bar" id="summaryBar">
+        <div class="summary-chip">
+            <span id="totalSubjects">4</span>
+            <p>Subjects</p>
+        </div>
+        <div class="summary-chip">
+            <span id="pendingCount">–</span>
+            <p>Pending</p>
+        </div>
+        <div class="summary-chip">
+            <span id="urgentCount">–</span>
+            <p>Urgent (&lt;3 days)</p>
+        </div>
+        <div class="summary-chip">
+            <span id="nextDeadline">–</span>
+            <p>Days to Next</p>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="deadlines-grid" id="deadlinesGrid">
+
+        <!-- ═══ CARD 1 ═══ -->
+        <div class="subject-card card-orange" id="card-0" data-deadline="2026-06-27T23:59:00"
+            data-start="2026-03-01T00:00:00">
+            <div class="subject-icon">💻</div>
+            <div class="subject-code">Unit 1</div>
+            <div class="subject-name">Programming</div>
+            <div class="subject-deadline-label">Deadline</div>
+            <div class="subject-deadline-date" id="date-0">Loading…</div>
+            <div class="countdown-row">
+                <div class="digit-block">
+                    <span class="digit-value" id="d-days-0">--</span>
+                    <span class="digit-label">Days</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-hours-0">--</span>
+                    <span class="digit-label">Hours</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-mins-0">--</span>
+                    <span class="digit-label">Mins</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-secs-0">--</span>
+                    <span class="digit-label">Secs</span>
+                </div>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-fill" id="prog-0" style="width:0%"></div>
+            </div>
+            <div class="progress-text" id="prog-text-0">Calculating…</div>
+            <div class="circ-wrap">
+                <svg class="circ-svg" viewBox="0 0 80 80">
+                    <circle class="circ-track" cx="40" cy="40" r="32" />
+                    <circle class="circ-progress" cx="40" cy="40" r="32" id="circ-0" style="stroke-dashoffset:201.06" />
+                </svg>
+                <span class="circ-label" id="circ-text-0">0%</span>
+            </div>
+            <div class="expired-overlay">⛔ DEADLINE PASSED</div>
+            <div class="status-badge status-ok" id="badge-0">Loading…</div>
+        </div>
+
+        <!-- ═══ CARD 2 ═══ -->
+        <div class="subject-card card-blue" id="card-1" data-deadline="2026-06-23T23:59:00"
+            data-start="2026-03-01T00:00:00">
+            <div class="subject-icon">🌐</div>
+            <div class="subject-code">Unit 2</div>
+            <div class="subject-name">Networking</div>
+            <div class="subject-deadline-label">Deadline</div>
+            <div class="subject-deadline-date" id="date-1">Loading…</div>
+            <div class="countdown-row">
+                <div class="digit-block">
+                    <span class="digit-value" id="d-days-1">--</span>
+                    <span class="digit-label">Days</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-hours-1">--</span>
+                    <span class="digit-label">Hours</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-mins-1">--</span>
+                    <span class="digit-label">Mins</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-secs-1">--</span>
+                    <span class="digit-label">Secs</span>
+                </div>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-fill" id="prog-1" style="width:0%"></div>
+            </div>
+            <div class="progress-text" id="prog-text-1">Calculating…</div>
+            <div class="circ-wrap">
+                <svg class="circ-svg" viewBox="0 0 80 80">
+                    <circle class="circ-track" cx="40" cy="40" r="32" />
+                    <circle class="circ-progress" cx="40" cy="40" r="32" id="circ-1" style="stroke-dashoffset:201.06" />
+                </svg>
+                <span class="circ-label" id="circ-text-1">0%</span>
+            </div>
+            <div class="expired-overlay">⛔ DEADLINE PASSED</div>
+            <div class="status-badge status-ok" id="badge-1">Loading…</div>
+        </div>
+
+        <!-- ═══ CARD 3 ═══ -->
+        <div class="subject-card card-purple" id="card-2" data-deadline="2026-06-25T23:59:00"
+            data-start="2026-03-01T00:00:00">
+            <div class="subject-icon">🎓</div>
+            <div class="subject-code">Unit 3</div>
+            <div class="subject-name">Professional Practice</div>
+            <div class="subject-deadline-label">Deadline</div>
+            <div class="subject-deadline-date" id="date-2">Loading…</div>
+            <div class="countdown-row">
+                <div class="digit-block">
+                    <span class="digit-value" id="d-days-2">--</span>
+                    <span class="digit-label">Days</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-hours-2">--</span>
+                    <span class="digit-label">Hours</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-mins-2">--</span>
+                    <span class="digit-label">Mins</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-secs-2">--</span>
+                    <span class="digit-label">Secs</span>
+                </div>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-fill" id="prog-2" style="width:0%"></div>
+            </div>
+            <div class="progress-text" id="prog-text-2">Calculating…</div>
+            <div class="circ-wrap">
+                <svg class="circ-svg" viewBox="0 0 80 80">
+                    <circle class="circ-track" cx="40" cy="40" r="32" />
+                    <circle class="circ-progress" cx="40" cy="40" r="32" id="circ-2" style="stroke-dashoffset:201.06" />
+                </svg>
+                <span class="circ-label" id="circ-text-2">0%</span>
+            </div>
+            <div class="expired-overlay">⛔ DEADLINE PASSED</div>
+            <div class="status-badge status-ok" id="badge-2">Loading…</div>
+        </div>
+
+        <!-- ═══ CARD 4 ═══ -->
+        <div class="subject-card card-green" id="card-3" data-deadline="2026-06-21T23:59:00"
+            data-start="2026-03-01T00:00:00">
+            <div class="subject-icon">🗄️</div>
+            <div class="subject-code">Unit 4</div>
+            <div class="subject-name">Database Design &amp; Development</div>
+            <div class="subject-deadline-label">Deadline</div>
+            <div class="subject-deadline-date" id="date-3">Loading…</div>
+            <div class="countdown-row">
+                <div class="digit-block">
+                    <span class="digit-value" id="d-days-3">--</span>
+                    <span class="digit-label">Days</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-hours-3">--</span>
+                    <span class="digit-label">Hours</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-mins-3">--</span>
+                    <span class="digit-label">Mins</span>
+                </div>
+                <div class="digit-block">
+                    <span class="digit-value" id="d-secs-3">--</span>
+                    <span class="digit-label">Secs</span>
+                </div>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-fill" id="prog-3" style="width:0%"></div>
+            </div>
+            <div class="progress-text" id="prog-text-3">Calculating…</div>
+            <div class="circ-wrap">
+                <svg class="circ-svg" viewBox="0 0 80 80">
+                    <circle class="circ-track" cx="40" cy="40" r="32" />
+                    <circle class="circ-progress" cx="40" cy="40" r="32" id="circ-3" style="stroke-dashoffset:201.06" />
+                </svg>
+                <span class="circ-label" id="circ-text-3">0%</span>
+            </div>
+            <div class="expired-overlay">⛔ DEADLINE PASSED</div>
+            <div class="status-badge status-ok" id="badge-3">Loading…</div>
+        </div>
+
+    </div><!-- /grid -->
+
+    <!-- ══════════════════════════════════════════════
+         Activity Modal
+    ══════════════════════════════════════════════ -->
+    <div id="activityModal" class="act-modal hidden">
+        <div class="act-backdrop"></div>
+        <div class="act-box">
+            <button class="act-close" id="closeModal">&#x2715;</button>
+
+            <!-- Top info strip -->
+            <div class="act-header">
+                <div class="act-header-icon" id="modalIcon">💻</div>
+                <div class="act-header-info">
+                    <div class="act-unit" id="modalUnit">Unit</div>
+                    <h2 id="modalTitle" class="act-title">Activities</h2>
+                    <div class="act-deadline-row">
+                        <span class="act-dl-label">Deadline:</span>
+                        <span id="modalDeadline" class="act-dl-val">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress strip -->
+            <div class="act-progress-strip">
+                <div class="act-strip-row">
+                    <span class="act-strip-label">⏳ Time Elapsed</span>
+                    <span id="modalTimePct" class="act-strip-val">—</span>
+                </div>
+                <div class="act-bar-wrap">
+                    <div class="act-bar-fill act-bar-time" id="modalTimeBar" style="width:0%"></div>
+                </div>
+                <div class="act-strip-row" style="margin-top:14px">
+                    <span class="act-strip-label">✅ Activities Done</span>
+                    <span id="modalActPct" class="act-strip-val">0 / 4</span>
+                </div>
+                <div class="act-bar-wrap">
+                    <div class="act-bar-fill act-bar-act" id="modalActBar" style="width:0%"></div>
+                </div>
+            </div>
+
+            <p class="act-subtitle">Click a row to mark the activity as done</p>
+            <div id="activityList" class="act-list"></div>
+        </div>
+    </div>
+
+    <!-- Template for a single activity row -->
+    <template id="activityTemplate">
+        <div class="act-row">
+            <label class="act-label">
+                <input type="checkbox" class="activity-checkbox" />
+                <span class="act-checkmark"></span>
+                <span class="activity-title"></span>
+            </label>
+            <button class="subq-toggle">&#x25BC; Details</button>
+            <div class="subq-text hidden">Sub‑questions will be added here soon.</div>
+        </div>
+    </template>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">© 2025 Sameera Official — HND Deadline Tracker</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#top" class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4l-8 8h16l-8-8z" fill="currentColor" />
+        </svg>
+    </a>
+
+    <script src="sameera-scripts.js"></script>
+    <script>
+        // ─────────────────────────────────────────────
+        //  Live Clock
+        // ─────────────────────────────────────────────
+        function updateClock() {
+            const now = new Date();
+            const opts = {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            };
+            document.getElementById('liveClock').textContent = now.toLocaleString('en-GB', opts);
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // ─────────────────────────────────────────────
+        //  Countdown Engine
+        // ─────────────────────────────────────────────
+        const pad = n => String(Math.max(0, n)).padStart(2, '0');
+
+        function formatDate(d) {
+            return d.toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        function getStatus(days) {
+            if (days < 0) return ['status-expired', 'EXPIRED'];
+            if (days < 3) return ['status-urgent', '🔴 URGENT'];
+            if (days < 7) return ['status-warning', '🟡 THIS WEEK'];
+            return ['status-ok', '🟢 ON TRACK'];
+        }
+
+        function tick() {
+            const now = Date.now();
+            let pending = 0, urgent = 0, minDays = Infinity;
+
+            document.querySelectorAll('.subject-card').forEach((card, i) => {
+                const deadline = new Date(card.dataset.deadline).getTime();
+                const startTime = new Date(card.dataset.start).getTime();
+                const diff = deadline - now;
+
+                // Always update the display date
+                document.getElementById('date-' + i).textContent =
+                    formatDate(new Date(card.dataset.deadline));
+
+                if (diff <= 0) {
+                    // Expired
+                    card.classList.add('expired');
+                    ['days', 'hours', 'mins', 'secs'].forEach(u =>
+                        document.getElementById(`d-${u}-${i}`).textContent = '00');
+                    document.getElementById(`prog-${i}`).style.width = '100%';
+                    document.getElementById(`prog-text-${i}`).textContent = '100% elapsed';
+                    const b = document.getElementById(`badge-${i}`);
+                    b.className = 'status-badge status-expired';
+                    b.textContent = 'EXPIRED';
+                    return;
+                }
+
+                pending++;
+                const totalMs = deadline - startTime;
+                const elapsed = now - startTime;
+                const pct = Math.min(100, Math.max(0, (elapsed / totalMs) * 100));
+
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor((diff % 86400000) / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+
+                document.getElementById(`d-days-${i}`).textContent = pad(days);
+                document.getElementById(`d-hours-${i}`).textContent = pad(hours);
+                document.getElementById(`d-mins-${i}`).textContent = pad(mins);
+                document.getElementById(`d-secs-${i}`).textContent = pad(secs);
+
+                document.getElementById(`prog-${i}`).style.width = pct.toFixed(1) + '%';
+                document.getElementById(`prog-text-${i}`).textContent =
+                    pct.toFixed(1) + '% of time elapsed';
+
+                const [cls, label] = getStatus(days);
+                const b = document.getElementById(`badge-${i}`);
+                b.className = 'status-badge ' + cls;
+                b.textContent = label;
+
+                if (days < 3) urgent++;
+                if (days < minDays) minDays = days;
+            });
+
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('urgentCount').textContent = urgent;
+            document.getElementById('nextDeadline').textContent = minDays === Infinity ? '–' : minDays;
+        }
+
+        tick();
+        setInterval(tick, 1000);
+
+
+    </script>
+        <script>
+        // Symmetric Decryption using RC4
+        (function () {
+            // RC4 Decryption Algorithm
+            function rc4(key, str) {
+                let s = [], j = 0, x, res = '';
+                for (let i = 0; i < 256; i++) {
+                    s[i] = i;
+                }
+                for (let i = 0; i < 256; i++) {
+                    j = (j + s[i] + key.charCodeAt(i % key.length)) % 256;
+                    x = s[i]; s[i] = s[j]; s[j] = x;
+                }
+                let i = 0;
+                j = 0;
+                for (let y = 0; y < str.length; y++) {
+                    i = (i + 1) % 256;
+                    j = (j + s[i]) % 256;
+                    x = s[i]; s[i] = s[j]; s[j] = x;
+                    res += String.fromCharCode(str.charCodeAt(y) ^ s[(s[i] + s[j]) % 256]);
+                }
+                return res;
+            }
+
+            function decrypt(key, base64Cipher) {
+                try {
+                    const ciphertext = atob(base64Cipher);
+                    return rc4(key, ciphertext);
+                } catch(e) {
+                    return null;
+                }
+            }
+
+            // Encrypted ASSIGNMENT_DATA payload
+            const ENCRYPTED_PAYLOAD = "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"; 
+
+            const overlay = document.getElementById("passwordOverlay");
+            const input = document.getElementById("pagePassword");
+            const btn = document.getElementById("submitPasswordBtn");
+            const error = document.getElementById("passwordError");
+
+            // Try to restore decrypted data from sessionStorage
+            const sessionData = sessionStorage.getItem("assignmentDataDecrypted");
+            if (sessionData) {
+                try {
+                    ASSIGNMENT_DATA = JSON.parse(sessionData);
+                    overlay.classList.add("hidden");
+                    // Trigger initialization since scripts are already loaded
+                    initActivityModal();
+                    document.querySelectorAll('.subject-card').forEach(function(card) {
+                        updateCardProgress(card.id);
+                    });
+                    return;
+                } catch(e) {
+                    sessionStorage.removeItem("assignmentDataDecrypted");
+                }
+            }
+
+            function checkPassword() {
+                const password = input.value;
+                const decrypted = decrypt(password, ENCRYPTED_PAYLOAD);
+                
+                if (decrypted) {
+                    try {
+                        const dataObj = JSON.parse(decrypted);
+                        if (dataObj && dataObj['card-0']) {
+                            ASSIGNMENT_DATA = dataObj;
+                            sessionStorage.setItem("assignmentDataDecrypted", decrypted);
+                            overlay.classList.add("hidden");
+                            
+                            // Initialize page
+                            initActivityModal();
+                            document.querySelectorAll('.subject-card').forEach(function(card) {
+                                updateCardProgress(card.id);
+                            });
+                            return;
+                        }
+                    } catch(e) {
+                        // failed to parse
+                    }
+                }
+                
+                error.classList.remove("hidden");
+                input.value = "";
+                input.focus();
+            }
+
+            btn.addEventListener("click", checkPassword);
+            input.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    checkPassword();
+                }
+            });
+
+            // Focus on input automatically
+            setTimeout(() => input.focus(), 100);
+        })();
+    </script>
+</body>
+
+</html>
